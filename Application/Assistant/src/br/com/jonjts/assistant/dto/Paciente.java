@@ -27,6 +27,7 @@ public class Paciente implements Serializable{
     public static final String FILD_OBJETIVO_CONSULTA = "objetivo_consulta";
     public static final String FILD_DATA_CADASTRO = "data_cadastro";
     public static final String FILD_ESCOLARIDADE = "escolaridade";
+    public static final String FILD_STATUS = "status";
     
     @DatabaseField(columnName = FILD_ID)
     private Long id;
@@ -51,11 +52,15 @@ public class Paciente implements Serializable{
     
     @DatabaseField(columnName = FILD_ESCOLARIDADE)
     private String escolaridade;
+    
+    @DatabaseField(columnName = FILD_STATUS, canBeNull = false, defaultValue = "1")
+    private Boolean status;
 
     public Paciente() {
+        super();
     }
 
-    public Paciente(Long id, String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade) {
+    public Paciente(Long id, String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade, Boolean status) {
         this.id = id;
         this.nome = nome;
         this.sexo = sexo;
@@ -64,9 +69,10 @@ public class Paciente implements Serializable{
         this.objetivoConsulta = objetivoConsulta;
         this.dataCadastro = dataCadastro;
         this.escolaridade = escolaridade;
+        this.status = status;
     }
 
-    public Paciente(String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade) {
+    public Paciente(String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade, Boolean status) {
         this.nome = nome;
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
@@ -74,6 +80,7 @@ public class Paciente implements Serializable{
         this.objetivoConsulta = objetivoConsulta;
         this.dataCadastro = dataCadastro;
         this.escolaridade = escolaridade;
+        this.status = status;
     }
 
     public Long getId() {
@@ -130,6 +137,14 @@ public class Paciente implements Serializable{
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public Boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public String getEscolaridade() {
