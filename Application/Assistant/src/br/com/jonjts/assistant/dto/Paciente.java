@@ -29,7 +29,7 @@ public class Paciente implements Serializable{
     public static final String FILD_ESCOLARIDADE = "escolaridade";
     public static final String FILD_STATUS = "status";
     
-    @DatabaseField(columnName = FILD_ID)
+    @DatabaseField(columnName = FILD_ID, id = true)
     private Long id;
     
     @DatabaseField(columnName = FILD_NOME, canBeNull = false)
@@ -58,6 +58,7 @@ public class Paciente implements Serializable{
 
     public Paciente() {
         super();
+        setStatus(true);
     }
 
     public Paciente(Long id, String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade, Boolean status) {

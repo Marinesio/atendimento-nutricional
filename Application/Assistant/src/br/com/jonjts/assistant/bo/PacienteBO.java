@@ -30,6 +30,11 @@ public class PacienteBO implements IBO<Paciente>{
     }
 
     @Override
+    public Paciente get(Number id) throws Exception {
+        return getPacienteDAO().findById(id.longValue());
+    }
+ 
+    @Override
     public Paciente insert(Paciente object) throws Exception {
         synchronized("insert"){
             getPacienteDAO().persist(object);
@@ -39,7 +44,9 @@ public class PacienteBO implements IBO<Paciente>{
 
     @Override
     public List<Paciente> getAll() throws Exception {
-        return getPacienteDAO().listAll();
+        QueryBuilder<Paciente, Long> builder = getPacienteDAO().queryBuilder();
+        List<Paciente> query = builder.where().eq(Paciente.FILD_STATUS, 1).query();
+        return query; 
     }
 
     @Override
@@ -54,7 +61,8 @@ public class PacienteBO implements IBO<Paciente>{
     
     public List<Paciente> searchByName(String nome) throws SQLException{
         QueryBuilder<Paciente, Long> builder = getPacienteDAO().queryBuilder();
-        List<Paciente> query = builder.where().like(Paciente.FILD_NOME, "%"+nome+"%").query();
+        List<Paciente> query = builder.where().like(Paciente.FILD_NOME, "%"+nome+"%").and().eq(Paciente.FILD_STATUS, 1).query();
         return query; 
     }
+
 }

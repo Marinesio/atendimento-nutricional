@@ -20,4 +20,6 @@ public interface IBO<E> {
     public void delete(Number id) throws Exception;
 
     public void update(E object) throws Exception;
+    
+    public E get(Number id) throws Exception;
 }

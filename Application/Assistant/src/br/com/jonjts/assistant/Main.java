@@ -3,16 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.jonjts.assistant;
 
+import br.com.jonjts.assistant.bo.PacienteBO;
 import br.com.jonjts.assistant.dao.DAO;
+import br.com.jonjts.assistant.dto.Paciente;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author Jonas
  */
 public class Main extends Tamplate {
+
+    private PacienteBO pacienteBO = new PacienteBO();
 
     /**
      * Creates new form Main
@@ -21,6 +42,23 @@ public class Main extends Tamplate {
         super();
         initComponents();
         fixLayout();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                if (JOptionPane.showConfirmDialog(null, "Deseja fechar " + getTitle() + "?") == JOptionPane.OK_OPTION) {
+                    System.exit(0);
+                } else {
+                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                }
+            }
+        });
+        fixLayoutTable();
+        try {
+            popularTabela(pacienteBO.getAll());
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -30,8 +68,62 @@ public class Main extends Tamplate {
         setSize(731, 360);
         setResizable(false);
     }
-    
-    
+
+    private void fixLayoutTable() {
+        DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
+        leftRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        tbPacientes.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
+        //tbPacientes.getColumnModel().getColumn(3).setCellRenderer(leftRenderer);
+        //tbPacientes.getColumnModel().getColumn(4).setCellRenderer(leftRenderer);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tbPacientes.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+
+        tbPacientes.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tbPacientes.getColumnModel().getColumn(2).setPreferredWidth(15);
+        tbPacientes.getColumnModel().getColumn(1).setPreferredWidth(180);
+        tbPacientes.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+
+        tbPacientes.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    Object valueAt = tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0);
+                    callNovoPaciente(valueAt);
+                }
+            }
+        });
+
+    }
+
+    private void popularTabela(List<Paciente> list) {
+        DefaultTableModel model = (DefaultTableModel) tbPacientes.getModel();
+        tbPacientes.getColumnModel().getColumn(0).setWidth(10);
+        model.fireTableDataChanged();
+
+        while (model.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+
+        for (Paciente p : list) {
+            String idade = p.getDataNascimento() == null ? "" : getIdade(p) + "";
+            model.addRow(new Object[]{p.getId(), p.getNome(), idade, p.getSexo()});
+        }
+
+    }
+
+    private int getIdade(Paciente paciente) {
+        Date parse = paciente.getDataNascimento();
+        Date date = new Date();
+        int yearP = parse.getYear();
+        int year = date.getYear();
+        int idade = year - yearP;
+        parse.setYear(date.getYear());
+        if (!parse.before(date)) {
+            idade -= 1;
+        }
+        return idade;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,15 +151,22 @@ public class Main extends Tamplate {
 
             },
             new String [] {
-                "Nome", "Idade", "Sexo", "Última Consulta"
+                "#", "Nome", "Idade", "Sexo", "Última Consulta"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Long.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tbPacientes);
@@ -75,10 +174,25 @@ public class Main extends Tamplate {
         jLabel1.setText("Pacientes");
 
         btnNovoPaciente.setText("Novo Paciente");
+        btnNovoPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoPacienteActionPerformed(evt);
+            }
+        });
 
         btnCarregarPaciente.setText("Carregar Paciente");
+        btnCarregarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarPacienteActionPerformed(evt);
+            }
+        });
 
         txtPesquisa.setToolTipText("Pesuisar Paciente");
+        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisaKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Pesquisar por nome");
 
@@ -124,6 +238,41 @@ public class Main extends Tamplate {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNovoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoPacienteActionPerformed
+        NovoPaciente novoPaciente = new NovoPaciente(null, Main.this);
+        novoPaciente.setVisible(true);
+    }//GEN-LAST:event_btnNovoPacienteActionPerformed
+
+    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
+        search();
+    }
+
+    protected void search() {
+        try {
+            List<Paciente> searchByName = pacienteBO.searchByName(txtPesquisa.getText());
+            popularTabela(searchByName);
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtPesquisaKeyReleased
+
+    private void btnCarregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarPacienteActionPerformed
+        if(tbPacientes.getSelectedColumnCount() == 1){
+        Object valueAt = tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0);
+        callNovoPaciente(valueAt);
+        }
+    }
+
+    protected void callNovoPaciente(Object valueAt) {
+        try {
+            Paciente p = pacienteBO.get((Long) valueAt);
+            NovoPaciente novoPaciente = new NovoPaciente(p, this);
+            novoPaciente.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCarregarPacienteActionPerformed
 
     /**
      * @param args the command line arguments

@@ -20,26 +20,14 @@ public class Tamplate extends javax.swing.JFrame {
      */
     public Tamplate() {
         initComponents();
-
         fixLayout();
-        
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent evt) {
-                if (JOptionPane.showConfirmDialog(null, "Deseja fechar "+ getTitle()+"?") == JOptionPane.OK_OPTION) {
-                    System.exit(0);
-                }else{
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
-            }
-        });
     }
 
-    protected void fixLayout(){
+    protected void fixLayout() {
         setSize(800, 600);
         setLocationRelativeTo(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
