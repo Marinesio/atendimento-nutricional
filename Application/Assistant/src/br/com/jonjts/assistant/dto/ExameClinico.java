@@ -9,6 +9,7 @@ package br.com.jonjts.assistant.dto;
 import br.com.jonjts.assistant.persistencia.ExameClinicoPersistencia;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import sun.java2d.pipe.SpanShapeRenderer;
@@ -18,7 +19,9 @@ import sun.java2d.pipe.SpanShapeRenderer;
  * @author Jonas
  */
 @DatabaseTable(tableName = "exame_clinico", daoClass = ExameClinicoPersistencia.class)
-public class ExameClinico {
+public class ExameClinico implements Serializable{
+    
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     public static final String FILD_ID = "id";
     public static final String FILD_ID_PACIENTE = "id_paciente";
@@ -74,11 +77,20 @@ public class ExameClinico {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(data == null){
+        if(isToday()){
             return "Hoje";
         }
         return sdf.format(getData());
+    }
+    
+    public boolean isToday(){
+        if(data != null){
+            Date d = new Date();
+            if(d.getDay() == data.getDay() && d.getMonth() == data.getMonth() && d.getYear() == data.getYear()){
+                return true;
+            }
+        }
+        return false;
     }
    
     

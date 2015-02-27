@@ -160,6 +160,12 @@ public class ExameFisicoS extends javax.swing.JFrame {
         return exameFisico;
     }
 
+    public void limparTudoNessaPorra(){
+        txtCabelo.setText("");
+        txtEdemas.setText("");
+        txtHidratacao.setText("");
+        txtUnhas.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

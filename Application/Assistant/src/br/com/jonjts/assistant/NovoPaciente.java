@@ -41,7 +41,6 @@ public class NovoPaciente extends Tamplate {
 
     private Paciente paciente;
     private HistoricoClinico historicoClinico;
-    private ExameClinico exameClinico;
     private Main main;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat sdfHM = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -79,25 +78,35 @@ public class NovoPaciente extends Tamplate {
 
         prepareTabPaciente();
         disableAllItemHistoricoClinico();
-        loadCbExameClinico();
 
         if (paciente != null) {
             loadAllInformations();
+            loadCbExameClinico();
         } else {
             disableTabs();
         }
+        loadExameFisico();
+    }
+
+    private boolean existToday(List<ExameClinico> list) {
+        for (ExameClinico e : list) {
+            if (e.isToday()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void loadCbExameClinico() {
         try {
-            allExameClinico = exameClinicoBO.getAll();
-            List<String> datas = new ArrayList<>();
-            for (ExameClinico e : allExameClinico) {
-                datas.add(sdf.format(e.getData()));
+            allExameClinico = exameClinicoBO.get(paciente.getId());
+            ExameClinico get = allExameClinico.get(0);
+            if (!existToday(allExameClinico)) {
+                ExameClinico ec = new ExameClinico();
+                ec.setData(new Date());
+                allExameClinico.add(0, ec);
             }
-            datas.add("Hoje");
-            cbExameClinico.setModel(new DefaultComboBoxModel(datas.toArray()));
-            cbExameClinico.setSelectedItem("Hoje");
+            cbExameClinico.setModel(new DefaultComboBoxModel(allExameClinico.toArray()));
         } catch (Exception ex) {
             Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -209,14 +218,27 @@ public class NovoPaciente extends Tamplate {
 
     private void loadExameFisico() {
         try {
-            if (exameClinico != null) {
-                exameFisicoS.setExameFisico(exameFisicoBO.get(exameClinico.getId()));
-                exameFisicoS.carregarExameFisico();
+            ExameClinico selectedItem = (ExameClinico) cbExameClinico.getSelectedItem();
+            if (selectedItem != null && selectedItem.getData() != null && selectedItem.getId() != null) {
+                ExameFisico get = exameFisicoBO.get(selectedItem.getId());
+                if (get != null) {
+                    exameFisicoS.setExameFisico(get);
+                    exameFisicoS.carregarExameFisico();
+                } else {
+                    limparTelaExameFisico();
+                }
+            } else {
+                limparTelaExameFisico();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar Exame Fisico");
             Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void limparTelaExameFisico() {
+        exameFisicoS.setExameFisico(null);
+        exameFisicoS.limparTudoNessaPorra();
     }
 
     private void loadPaciente() {
@@ -721,6 +743,8 @@ public class NovoPaciente extends Tamplate {
         if (paciente == null) {
             try {
                 insertPaciente();
+                saveExameExameClinico();
+                loadCbExameClinico();
                 enableTabs();
             } catch (Exception ex) {
                 paciente = null;
@@ -768,11 +792,6 @@ public class NovoPaciente extends Tamplate {
     }//GEN-LAST:event_btnSalvarHistoricoClinicoActionPerformed
 
     private void cbExameClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExameClinicoActionPerformed
-        if (cbExameClinico.getSelectedItem().equals("Hoje")) {
-            exameClinico = null;
-        } else {
-            exameClinico = allExameClinico.get(cbExameClinico.getSelectedIndex());
-        }
         loadExameFisico();
     }//GEN-LAST:event_cbExameClinicoActionPerformed
 
@@ -787,15 +806,20 @@ public class NovoPaciente extends Tamplate {
 
     public ExameFisico saveExameFisico(ExameFisico exameFisico) throws Exception {
         saveExameExameClinico();
-        exameFisico.setIdExameClinico(exameClinico.getId());
+        exameFisico.setIdExameClinico(((ExameClinico) cbExameClinico.getSelectedItem()).getId());
         exameFisico.setIdPaciente(paciente.getId());
         return exameFisicoBO.insert(exameFisico);
     }
 
     private void saveExameExameClinico() throws Exception {
-        if (exameClinico == null) {
+        final ExameClinico selectedItem = (ExameClinico) cbExameClinico.getSelectedItem();
+        if (selectedItem == null || selectedItem.getId() == null) {
+            ExameClinico exameClinico = new ExameClinico();
             exameClinico = new ExameClinico(paciente.getId(), new Date());
             exameClinico = exameClinicoBO.insert(exameClinico);
+
+            selectedItem.setId(exameClinico.getId());
+            selectedItem.setIdPaciente(exameClinico.getIdPaciente());
         }
     }
 
