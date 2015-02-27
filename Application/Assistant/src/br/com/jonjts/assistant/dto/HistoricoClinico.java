@@ -6,7 +6,7 @@
 
 package br.com.jonjts.assistant.dto;
 
-import br.com.jonjts.assistant.dao.HistoricoClinicoDAO;
+import br.com.jonjts.assistant.persistencia.HistoricoClinicoPersistencia;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -14,7 +14,7 @@ import com.j256.ormlite.table.DatabaseTable;
  *
  * @author Jonas
  */
-@DatabaseTable(tableName = "historico_clinico", daoClass = HistoricoClinicoDAO.class)
+@DatabaseTable(tableName = "historico_clinico", daoClass = HistoricoClinicoPersistencia.class)
 public class HistoricoClinico {
     
     public static final String FILD_ID = "id";

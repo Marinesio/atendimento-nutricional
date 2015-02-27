@@ -5,8 +5,12 @@
  */
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.bo.HistoricoClinicoBO;
-import br.com.jonjts.assistant.bo.PacienteBO;
+import br.com.jonjts.assistant.controle.ExameClinicoControle;
+import br.com.jonjts.assistant.controle.ExameFisicoControle;
+import br.com.jonjts.assistant.controle.HistoricoClinicoControle;
+import br.com.jonjts.assistant.controle.PacienteControle;
+import br.com.jonjts.assistant.dto.ExameClinico;
+import br.com.jonjts.assistant.dto.ExameFisico;
 import br.com.jonjts.assistant.dto.HistoricoClinico;
 import br.com.jonjts.assistant.dto.Paciente;
 import java.awt.Component;
@@ -37,13 +41,18 @@ public class NovoPaciente extends Tamplate {
 
     private Paciente paciente;
     private HistoricoClinico historicoClinico;
+    private ExameClinico exameClinico;
     private Main main;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat sdfHM = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
+    private ExameFisicoS exameFisicoS;
     //BOs
-    private PacienteBO pacienteBO = new PacienteBO();
-    private HistoricoClinicoBO historicoClinicoBO = new HistoricoClinicoBO();
+    private PacienteControle pacienteBO = new PacienteControle();
+    private HistoricoClinicoControle historicoClinicoBO = new HistoricoClinicoControle();
+    private ExameClinicoControle exameClinicoBO = new ExameClinicoControle();
+    private ExameFisicoControle exameFisicoBO = new ExameFisicoControle();
+    private List<ExameClinico> allExameClinico;
 
     /**
      * Creates new form NovoPaciente
@@ -70,11 +79,27 @@ public class NovoPaciente extends Tamplate {
 
         prepareTabPaciente();
         disableAllItemHistoricoClinico();
+        loadCbExameClinico();
 
         if (paciente != null) {
             loadAllInformations();
         } else {
             disableTabs();
+        }
+    }
+
+    private void loadCbExameClinico() {
+        try {
+            allExameClinico = exameClinicoBO.getAll();
+            List<String> datas = new ArrayList<>();
+            for (ExameClinico e : allExameClinico) {
+                datas.add(sdf.format(e.getData()));
+            }
+            datas.add("Hoje");
+            cbExameClinico.setModel(new DefaultComboBoxModel(datas.toArray()));
+            cbExameClinico.setSelectedItem("Hoje");
+        } catch (Exception ex) {
+            Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -179,6 +204,19 @@ public class NovoPaciente extends Tamplate {
     private void loadAllInformations() {
         loadPaciente();
         loadHistoricoClinico();
+        //loadExameFisico();
+    }
+
+    private void loadExameFisico() {
+        try {
+            if (exameClinico != null) {
+                exameFisicoS.setExameFisico(exameFisicoBO.get(exameClinico.getId()));
+                exameFisicoS.carregarExameFisico();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Exame Fisico");
+            Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void loadPaciente() {
@@ -263,7 +301,12 @@ public class NovoPaciente extends Tamplate {
         jLabel19 = new javax.swing.JLabel();
         txtFrequenciaExercicioFisico = new javax.swing.JTextField();
         btnSalvarHistoricoClinico = new javax.swing.JButton();
+        pnlExameFisico = new javax.swing.JPanel();
+        exameFisicoS = new br.com.jonjts.assistant.ExameFisicoS(this);
+        pnlExameFisico.add(exameFisicoS.getRootPane());
+        btnSalvarExameFisico = new javax.swing.JToggleButton();
         lblDtCadastro = new javax.swing.JLabel();
+        cbExameClinico = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -377,7 +420,7 @@ public class NovoPaciente extends Tamplate {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -542,7 +585,7 @@ public class NovoPaciente extends Tamplate {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -575,7 +618,39 @@ public class NovoPaciente extends Tamplate {
 
         tbpPaciente.addTab("Historico Clinico", jPanel2);
 
+        btnSalvarExameFisico.setText("Salvar Exame Fisico");
+        btnSalvarExameFisico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarExameFisicoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlExameFisicoLayout = new javax.swing.GroupLayout(pnlExameFisico);
+        pnlExameFisico.setLayout(pnlExameFisicoLayout);
+        pnlExameFisicoLayout.setHorizontalGroup(
+            pnlExameFisicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlExameFisicoLayout.createSequentialGroup()
+                .addContainerGap(577, Short.MAX_VALUE)
+                .addComponent(btnSalvarExameFisico)
+                .addGap(29, 29, 29))
+        );
+        pnlExameFisicoLayout.setVerticalGroup(
+            pnlExameFisicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlExameFisicoLayout.createSequentialGroup()
+                .addContainerGap(444, Short.MAX_VALUE)
+                .addComponent(btnSalvarExameFisico)
+                .addContainerGap())
+        );
+
+        tbpPaciente.addTab("Exame Físico", pnlExameFisico);
+
         lblDtCadastro.setText(" ");
+
+        cbExameClinico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbExameClinicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -590,11 +665,17 @@ public class NovoPaciente extends Tamplate {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblDtCadastro)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbExameClinico, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
+                .addComponent(cbExameClinico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tbpPaciente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDtCadastro)
@@ -686,6 +767,38 @@ public class NovoPaciente extends Tamplate {
         }
     }//GEN-LAST:event_btnSalvarHistoricoClinicoActionPerformed
 
+    private void cbExameClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExameClinicoActionPerformed
+        if (cbExameClinico.getSelectedItem().equals("Hoje")) {
+            exameClinico = null;
+        } else {
+            exameClinico = allExameClinico.get(cbExameClinico.getSelectedIndex());
+        }
+        loadExameFisico();
+    }//GEN-LAST:event_cbExameClinicoActionPerformed
+
+    private void btnSalvarExameFisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarExameFisicoActionPerformed
+        exameFisicoS.save();
+    }//GEN-LAST:event_btnSalvarExameFisicoActionPerformed
+
+    public void updateExameFisico(ExameFisico exameFisico) throws Exception {
+        saveExameExameClinico();
+        exameFisicoBO.update(exameFisico);
+    }
+
+    public ExameFisico saveExameFisico(ExameFisico exameFisico) throws Exception {
+        saveExameExameClinico();
+        exameFisico.setIdExameClinico(exameClinico.getId());
+        exameFisico.setIdPaciente(paciente.getId());
+        return exameFisicoBO.insert(exameFisico);
+    }
+
+    private void saveExameExameClinico() throws Exception {
+        if (exameClinico == null) {
+            exameClinico = new ExameClinico(paciente.getId(), new Date());
+            exameClinico = exameClinicoBO.insert(exameClinico);
+        }
+    }
+
     private void updateHistoricoClinico() {
         try {
             preencherHistoricoClinico();
@@ -695,7 +808,6 @@ public class NovoPaciente extends Tamplate {
             JOptionPane.showMessageDialog(null, "Erro ao salvar Historico Clinico");
         }
     }
-
 
     private void insertHistoricoClinco() {
         try {
@@ -710,21 +822,20 @@ public class NovoPaciente extends Tamplate {
         }
     }
 
-
     private void preencherHistoricoClinico() {
         historicoClinico.setAtencedentesFamiliares(txtAtencedentesFamilares.getText());
         historicoClinico.setAtencedentesPatologicos(txtAtencedentesPatologicos.getText());
         historicoClinico.setDoencaAtual(txtDoencaAtual.getText());
         historicoClinico.setIdPaciente(paciente.getId());
-        
+
         historicoClinico.setEtilismo((String) cbEtilismo.getSelectedItem());
         historicoClinico.setTempoEtilismo(txtTempoEtilismo.getText());
         historicoClinico.setFrequenciaEtilismo(txtFrequenciaEtilismo.getText());
-        
+
         historicoClinico.setTabagismo((String) cbTabagismo.getSelectedItem());
         historicoClinico.setTempoTabagismo(txtTempoTabagismo.getText());
         historicoClinico.setFrequenciaTabagismo(txtFrequenciaTabagismo.getText());
-        
+
         historicoClinico.setExercicioFisico((String) cbExercicioFisico.getSelectedItem());
         historicoClinico.setTempoExercicioFisico(txtTempoExercicioFisico.getText());
         historicoClinico.setFrequenciaExercicioFisico(txtFrequenciaExercicioFisico.getText());
@@ -807,9 +918,11 @@ public class NovoPaciente extends Tamplate {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnSalvarExameFisico;
     private javax.swing.JButton btnSalvarHistoricoClinico;
     private javax.swing.JComboBox cbEscolaridade;
     private javax.swing.JComboBox cbEtilismo;
+    private javax.swing.JComboBox cbExameClinico;
     private javax.swing.JComboBox cbExercicioFisico;
     private javax.swing.JComboBox cbSexoPaciente;
     private javax.swing.JComboBox cbTabagismo;
@@ -842,6 +955,7 @@ public class NovoPaciente extends Tamplate {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDtCadastro;
     private javax.swing.JLabel lblIdadePaciente;
+    private javax.swing.JPanel pnlExameFisico;
     private javax.swing.JTabbedPane tbpPaciente;
     private javax.swing.JTextArea txtAtencedentesFamilares;
     private javax.swing.JTextArea txtAtencedentesPatologicos;

@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package br.com.jonjts.assistant.bo;
+package br.com.jonjts.assistant.controle;
 
-import br.com.jonjts.assistant.dao.HistoricoClinicoDAO;
+import br.com.jonjts.assistant.persistencia.HistoricoClinicoPersistencia;
 import br.com.jonjts.assistant.dto.HistoricoClinico;
 import br.com.jonjts.assistant.dto.Paciente;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,13 +18,17 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class HistoricoClinicoBO implements IBO<HistoricoClinico>{
+public class HistoricoClinicoControle implements IControle<HistoricoClinico>{
     
-    private HistoricoClinicoDAO historicoClinicoDAO;
+    private HistoricoClinicoPersistencia historicoClinicoDAO;
+    
+    public ConnectionSource getConnection() throws SQLException{
+        return getHistoricoClinicoDAO().getConnectionSource();
+    }
 
-    public HistoricoClinicoDAO getHistoricoClinicoDAO() throws SQLException {
+    public HistoricoClinicoPersistencia getHistoricoClinicoDAO() throws SQLException {
         if(historicoClinicoDAO == null){
-            return new HistoricoClinicoDAO(HistoricoClinico.class);
+            return new HistoricoClinicoPersistencia();
         }
         return historicoClinicoDAO;
     }

@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package br.com.jonjts.assistant.dao;
+package br.com.jonjts.assistant.persistencia;
 
+import br.com.jonjts.assistant.dto.ExameFisico;
 import br.com.jonjts.assistant.dto.Paciente;
 import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
@@ -14,10 +15,10 @@ import java.sql.SQLException;
  *
  * @author Jonas
  */
-public class PacienteDAO extends GenericDAO<Paciente, Long>{
+public class ExameFisicoPersistencia extends GenericPersistencia<ExameFisico, Long>{
 
-    public PacienteDAO(Class<Paciente> dataClass) throws SQLException {
-        super(DAO.instance().getConnectionSource(), Paciente.class);
+    public ExameFisicoPersistencia() throws SQLException {
+        super(DAO.instance().getConnectionSource(), ExameFisico.class);
     }
     
 }

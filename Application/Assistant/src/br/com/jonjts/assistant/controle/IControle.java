@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.jonjts.assistant.bo;
+package br.com.jonjts.assistant.controle;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public interface IBO<E> {
+public interface IControle<E> {
 
     public E insert(E object) throws Exception;
 

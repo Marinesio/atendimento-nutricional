@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.jonjts.assistant.dao;
+package br.com.jonjts.assistant.persistencia;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.dao.Dao;
@@ -22,9 +22,9 @@ import sun.java2d.pipe.AATileGenerator;
  *
  * @author Jonas
  */
-public abstract class GenericDAO<E,T> extends BaseDaoImpl<E, T> implements Dao<E, T>{
+public abstract class GenericPersistencia<E,T> extends BaseDaoImpl<E, T> implements Dao<E, T>{
     
-   public GenericDAO(ConnectionSource connectionSource, Class<E> dataClass) throws SQLException {
+   public GenericPersistencia(ConnectionSource connectionSource, Class<E> dataClass) throws SQLException {
         super(connectionSource, dataClass);
         initialize();
     }

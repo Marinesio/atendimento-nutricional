@@ -5,8 +5,8 @@
  */
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.bo.PacienteBO;
-import br.com.jonjts.assistant.dao.DAO;
+import br.com.jonjts.assistant.controle.PacienteControle;
+import br.com.jonjts.assistant.persistencia.DAO;
 import br.com.jonjts.assistant.dto.Paciente;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,7 +33,7 @@ import javax.swing.table.TableModel;
  */
 public class Main extends Tamplate {
 
-    private PacienteBO pacienteBO = new PacienteBO();
+    private PacienteControle pacienteBO = new PacienteControle();
 
     /**
      * Creates new form Main

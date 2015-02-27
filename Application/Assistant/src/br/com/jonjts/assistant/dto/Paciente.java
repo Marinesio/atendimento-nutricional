@@ -6,7 +6,7 @@
 
 package br.com.jonjts.assistant.dto;
 
-import br.com.jonjts.assistant.dao.PacienteDAO;
+import br.com.jonjts.assistant.persistencia.PacientePersistencia;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author Jonas
  */
-@DatabaseTable(tableName = "paciente", daoClass = PacienteDAO.class)
+@DatabaseTable(tableName = "paciente", daoClass = PacientePersistencia.class)
 public class Paciente implements Serializable{
 
     public static final String FILD_ID = "id";
