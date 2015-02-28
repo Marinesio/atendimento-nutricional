@@ -5,7 +5,9 @@
  */
 package br.com.jonjts.assistant;
 
+import br.com.jonjts.assistant.controle.ExameClinicoControle;
 import br.com.jonjts.assistant.controle.PacienteControle;
+import br.com.jonjts.assistant.dto.ExameClinico;
 import br.com.jonjts.assistant.persistencia.DAO;
 import br.com.jonjts.assistant.dto.Paciente;
 import java.awt.event.MouseAdapter;
@@ -14,6 +16,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -79,6 +82,8 @@ public class Main extends Tamplate {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         tbPacientes.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        tbPacientes.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        tbPacientes.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
 
         tbPacientes.getColumnModel().getColumn(0).setPreferredWidth(5);
         tbPacientes.getColumnModel().getColumn(2).setPreferredWidth(15);
@@ -105,9 +110,21 @@ public class Main extends Tamplate {
             model.removeRow(0);
         }
 
+        ExameClinicoControle clinicoControle = new ExameClinicoControle();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (Paciente p : list) {
-            String idade = p.getDataNascimento() == null ? "" : getIdade(p) + "";
-            model.addRow(new Object[]{p.getId(), p.getNome(), idade, p.getSexo()});
+            try {
+                String idade = p.getDataNascimento() == null ? "" : getIdade(p) + "";
+                ExameClinico lastConsulta = clinicoControle.getLastConsulta(p.getId());
+                String data = "";
+                if (lastConsulta != null) {
+                    data = sdf.format(lastConsulta.getData());
+                    data = lastConsulta.isToday() ? "Hoje" : data;
+                }
+                model.addRow(new Object[]{p.getId(), p.getNome(), idade, p.getSexo(), data});
+            } catch (SQLException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -258,9 +275,9 @@ public class Main extends Tamplate {
     }//GEN-LAST:event_txtPesquisaKeyReleased
 
     private void btnCarregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarPacienteActionPerformed
-        if(tbPacientes.getSelectedColumnCount() == 1){
-        Object valueAt = tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0);
-        callNovoPaciente(valueAt);
+        if (tbPacientes.getSelectedColumnCount() == 1) {
+            Object valueAt = tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0);
+            callNovoPaciente(valueAt);
         }
     }
 

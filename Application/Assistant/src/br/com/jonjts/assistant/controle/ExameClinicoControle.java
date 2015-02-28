@@ -28,6 +28,11 @@ public class ExameClinicoControle implements IControle<ExameClinico>{
         return exameClinicoDAO;
     }
 
+    public ExameClinico getLastConsulta(Long idPaciente) throws SQLException{
+        QueryBuilder<ExameClinico, Long> queryBuilder = getExameClinicoDAO().queryBuilder();
+        queryBuilder.where().eq("id_paciente", idPaciente);
+        return queryBuilder.queryForFirst();
+    }
     @Override
     public ExameClinico insert(ExameClinico object) throws Exception {
          synchronized("insert"){

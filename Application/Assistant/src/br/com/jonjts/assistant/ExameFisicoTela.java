@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author Jonas
  */
-public class ExameFisicoS extends javax.swing.JFrame {
+public class ExameFisicoTela extends javax.swing.JFrame {
 
     private ExameFisico exameFisico;
     private NovoPaciente novoPaciente;
 
-    public ExameFisicoS(NovoPaciente novoPaciente) {
+    public ExameFisicoTela(NovoPaciente novoPaciente) {
         this.novoPaciente = novoPaciente;
         initComponents();
     }
@@ -72,7 +72,7 @@ public class ExameFisicoS extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEdemas, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                            .addComponent(txtEdemas, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
                             .addComponent(txtCabelo)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
