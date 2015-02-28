@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jonas
  */
-public class ExameFisicoTela extends javax.swing.JFrame {
+public class ExameFisicoTela extends javax.swing.JFrame implements ITab{
 
     private ExameFisico exameFisico;
     private NovoPaciente novoPaciente;
@@ -24,7 +24,7 @@ public class ExameFisicoTela extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void carregarExameFisico() {
+    public void loadData() {
         txtCabelo.setText(exameFisico.getCabelo() == null ? "" : exameFisico.getCabelo());
         txtEdemas.setText(exameFisico.getEdemas() == null ? "" : exameFisico.getEdemas());
         txtHidratacao.setText(exameFisico.getHidratacao() == null ? "" : exameFisico.getHidratacao());
@@ -121,9 +121,10 @@ public class ExameFisicoTela extends javax.swing.JFrame {
         }
     }
 
+    
     private void updateExameFisico() {
         try {
-            preencherExameFisico();
+            fillObject();
             novoPaciente.updateExameFisico(exameFisico);
             JOptionPane.showMessageDialog(null, "Salvo");
         } catch (Exception ex) {
@@ -135,7 +136,7 @@ public class ExameFisicoTela extends javax.swing.JFrame {
     private void insertExameFisico() {
         try {
             exameFisico = new ExameFisico();
-            preencherExameFisico();
+            fillObject();
             exameFisico = novoPaciente.saveExameFisico(exameFisico);
             JOptionPane.showMessageDialog(null, "Salvo");
         } catch (Exception ex) {
@@ -145,7 +146,7 @@ public class ExameFisicoTela extends javax.swing.JFrame {
         }
     }
 
-    private void preencherExameFisico() {
+    private void fillObject() {
         exameFisico.setCabelo(txtCabelo.getText());
         exameFisico.setEdemas(txtEdemas.getText());
         exameFisico.setHidratacao(txtHidratacao.getText());
@@ -160,7 +161,7 @@ public class ExameFisicoTela extends javax.swing.JFrame {
         return exameFisico;
     }
 
-    public void limparTudoNessaPorra(){
+    public void clearData(){
         txtCabelo.setText("");
         txtEdemas.setText("");
         txtHidratacao.setText("");

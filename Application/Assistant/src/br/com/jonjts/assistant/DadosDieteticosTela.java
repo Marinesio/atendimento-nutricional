@@ -6,13 +6,20 @@
 
 package br.com.jonjts.assistant;
 
+import br.com.jonjts.assistant.dto.DadosDieteticos;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jonas
  */
-public class DadosDieteticosTela extends javax.swing.JFrame {
+public class DadosDieteticosTela extends javax.swing.JFrame implements ITab{
 
     private NovoPaciente novoPaciente;
+    private DadosDieteticos dadosDieteticos;
+    
     public DadosDieteticosTela(NovoPaciente novoPaciente) {
         this.novoPaciente = novoPaciente;
         initComponents();
@@ -31,17 +38,17 @@ public class DadosDieteticosTela extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAversoes = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtPreferencias = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
+        txtIntorelancia = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea8 = new javax.swing.JTextArea();
+        txtAlergias = new javax.swing.JTextArea();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea9 = new javax.swing.JTextArea();
+        txtIngestaoHidrica = new javax.swing.JTextArea();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea10 = new javax.swing.JTextArea();
+        txtLiquidosAssociadosRefeicoes = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -55,29 +62,29 @@ public class DadosDieteticosTela extends javax.swing.JFrame {
 
         jLabel2.setText("Preferências Alimentares:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAversoes.setColumns(20);
+        txtAversoes.setRows(5);
+        jScrollPane1.setViewportView(txtAversoes);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txtPreferencias.setColumns(20);
+        txtPreferencias.setRows(5);
+        jScrollPane2.setViewportView(txtPreferencias);
 
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jScrollPane7.setViewportView(jTextArea7);
+        txtIntorelancia.setColumns(20);
+        txtIntorelancia.setRows(5);
+        jScrollPane7.setViewportView(txtIntorelancia);
 
-        jTextArea8.setColumns(20);
-        jTextArea8.setRows(5);
-        jScrollPane8.setViewportView(jTextArea8);
+        txtAlergias.setColumns(20);
+        txtAlergias.setRows(5);
+        jScrollPane8.setViewportView(txtAlergias);
 
-        jTextArea9.setColumns(20);
-        jTextArea9.setRows(5);
-        jScrollPane9.setViewportView(jTextArea9);
+        txtIngestaoHidrica.setColumns(20);
+        txtIngestaoHidrica.setRows(5);
+        jScrollPane9.setViewportView(txtIngestaoHidrica);
 
-        jTextArea10.setColumns(20);
-        jTextArea10.setRows(5);
-        jScrollPane10.setViewportView(jTextArea10);
+        txtLiquidosAssociadosRefeicoes.setColumns(20);
+        txtLiquidosAssociadosRefeicoes.setRows(5);
+        jScrollPane10.setViewportView(txtLiquidosAssociadosRefeicoes);
 
         jLabel3.setText("Intolerâncias Alimentares:");
 
@@ -143,7 +150,7 @@ public class DadosDieteticosTela extends javax.swing.JFrame {
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,11 +170,78 @@ public class DadosDieteticosTela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea10;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextArea jTextArea8;
-    private javax.swing.JTextArea jTextArea9;
+    private javax.swing.JTextArea txtAlergias;
+    private javax.swing.JTextArea txtAversoes;
+    private javax.swing.JTextArea txtIngestaoHidrica;
+    private javax.swing.JTextArea txtIntorelancia;
+    private javax.swing.JTextArea txtLiquidosAssociadosRefeicoes;
+    private javax.swing.JTextArea txtPreferencias;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void save() {
+        if(dadosDieteticos == null){
+            insert();
+        }else{
+            update();
+        }
+    }
+    
+    private void insert(){
+        try {
+            dadosDieteticos = new DadosDieteticos();
+            preencherDados();
+            dadosDieteticos = novoPaciente.saveDadosDietateticos(dadosDieteticos);
+            JOptionPane.showMessageDialog(null, "Salvo");
+        } catch (Exception ex) {
+            dadosDieteticos = null;
+            JOptionPane.showMessageDialog(null, "Erro ao salvar Dados Dietéticos");
+            Logger.getLogger(DadosDieteticosTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void update(){
+        try {
+            preencherDados();
+            novoPaciente.updateDadosDieteticos(dadosDieteticos);
+            JOptionPane.showMessageDialog(null, "Salvo");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar Dados Dietéticos");
+            Logger.getLogger(DadosDieteticosTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void clearData() {
+        txtAlergias.setText("");
+        txtAversoes.setText("");
+        txtIngestaoHidrica.setText("");
+        txtIntorelancia.setText("");
+        txtLiquidosAssociadosRefeicoes.setText("");
+        txtPreferencias.setText("");
+    }
+
+    @Override
+    public void loadData() {
+        txtAlergias.setText(dadosDieteticos.getAlergias());
+        txtAversoes.setText(dadosDieteticos.getAversao());
+        txtIngestaoHidrica.setText(dadosDieteticos.getIngestaoHidrica());
+        txtIntorelancia.setText(dadosDieteticos.getIntolerancia());
+        txtLiquidosAssociadosRefeicoes.setText(dadosDieteticos.getLiquidosAssociados());
+        txtPreferencias.setText(dadosDieteticos.getPreferencia());
+    }
+    
+    private void preencherDados(){
+        dadosDieteticos.setAlergias(txtAlergias.getText());
+        dadosDieteticos.setAversao(txtAversoes.getText());
+        dadosDieteticos.setIngestaoHidrica(txtIngestaoHidrica.getText());
+        dadosDieteticos.setIntolerancia(txtIntorelancia.getText());
+        dadosDieteticos.setLiquidosAssociados(txtLiquidosAssociadosRefeicoes.getText());
+        dadosDieteticos.setPreferencia(txtPreferencias.getText());
+    }
+
+    public void setDadosDieteticos(DadosDieteticos dadosDieteticos) {
+        this.dadosDieteticos = dadosDieteticos;
+    }
+    
+    
 }
