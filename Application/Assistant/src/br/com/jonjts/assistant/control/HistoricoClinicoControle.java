@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package br.com.jonjts.assistant.controle;
+package br.com.jonjts.assistant.control;
 
-import br.com.jonjts.assistant.persistencia.HistoricoClinicoPersistencia;
-import br.com.jonjts.assistant.dto.HistoricoClinico;
-import br.com.jonjts.assistant.dto.Paciente;
+import br.com.jonjts.assistant.persistence.HistoricoClinicoPersistencia;
+import br.com.jonjts.assistant.entity.HistoricoClinico;
+import br.com.jonjts.assistant.entity.Paciente;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;

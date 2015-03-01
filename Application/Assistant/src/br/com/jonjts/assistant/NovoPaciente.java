@@ -5,16 +5,16 @@
  */
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.controle.DadosDieteticosControle;
-import br.com.jonjts.assistant.controle.ExameClinicoControle;
-import br.com.jonjts.assistant.controle.ExameFisicoControle;
-import br.com.jonjts.assistant.controle.HistoricoClinicoControle;
-import br.com.jonjts.assistant.controle.PacienteControle;
-import br.com.jonjts.assistant.dto.DadosDieteticos;
-import br.com.jonjts.assistant.dto.ExameClinico;
-import br.com.jonjts.assistant.dto.ExameFisico;
-import br.com.jonjts.assistant.dto.HistoricoClinico;
-import br.com.jonjts.assistant.dto.Paciente;
+import br.com.jonjts.assistant.control.DadosDieteticosControle;
+import br.com.jonjts.assistant.control.ExameClinicoControle;
+import br.com.jonjts.assistant.control.ExameFisicoControle;
+import br.com.jonjts.assistant.control.HistoricoClinicoControle;
+import br.com.jonjts.assistant.control.PacienteControle;
+import br.com.jonjts.assistant.entity.DadosDieteticos;
+import br.com.jonjts.assistant.entity.ExameClinico;
+import br.com.jonjts.assistant.entity.ExameFisico;
+import br.com.jonjts.assistant.entity.HistoricoClinico;
+import br.com.jonjts.assistant.entity.Paciente;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;

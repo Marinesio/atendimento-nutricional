@@ -6,7 +6,7 @@
 
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.dto.DadosDieteticos;
+import br.com.jonjts.assistant.entity.DadosDieteticos;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

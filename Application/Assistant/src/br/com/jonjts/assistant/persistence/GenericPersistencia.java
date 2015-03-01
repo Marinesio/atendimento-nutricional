@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.jonjts.assistant.persistencia;
+package br.com.jonjts.assistant.persistence;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.dao.Dao;

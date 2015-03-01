@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.jonjts.assistant.controle;
+package br.com.jonjts.assistant.control;
 
-import br.com.jonjts.assistant.persistencia.ExameFisicoPersistencia;
-import br.com.jonjts.assistant.persistencia.PacientePersistencia;
-import br.com.jonjts.assistant.dto.ExameFisico;
-import br.com.jonjts.assistant.dto.Paciente;
+import br.com.jonjts.assistant.persistence.ExameFisicoPersistencia;
+import br.com.jonjts.assistant.persistence.PacientePersistencia;
+import br.com.jonjts.assistant.entity.ExameFisico;
+import br.com.jonjts.assistant.entity.Paciente;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;

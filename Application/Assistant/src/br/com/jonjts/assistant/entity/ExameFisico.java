@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.jonjts.assistant.dto;
+package br.com.jonjts.assistant.entity;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

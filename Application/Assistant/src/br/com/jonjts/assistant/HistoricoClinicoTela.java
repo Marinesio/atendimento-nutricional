@@ -5,10 +5,10 @@
  */
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.dto.Exercicio;
-import br.com.jonjts.assistant.dto.HistoricoClinico;
-import br.com.jonjts.assistant.dto.MedicamentoDomiliciar;
-import br.com.jonjts.assistant.dto.Paciente;
+import br.com.jonjts.assistant.entity.Exercicio;
+import br.com.jonjts.assistant.entity.HistoricoClinico;
+import br.com.jonjts.assistant.entity.MedicamentoDomiliciar;
+import br.com.jonjts.assistant.entity.Paciente;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -5,7 +5,7 @@
  */
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.dto.ExameFisico;
+import br.com.jonjts.assistant.entity.ExameFisico;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

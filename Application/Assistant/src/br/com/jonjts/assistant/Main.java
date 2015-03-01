@@ -5,11 +5,11 @@
  */
 package br.com.jonjts.assistant;
 
-import br.com.jonjts.assistant.controle.ExameClinicoControle;
-import br.com.jonjts.assistant.controle.PacienteControle;
-import br.com.jonjts.assistant.dto.ExameClinico;
-import br.com.jonjts.assistant.persistencia.DAO;
-import br.com.jonjts.assistant.dto.Paciente;
+import br.com.jonjts.assistant.control.ExameClinicoControle;
+import br.com.jonjts.assistant.control.PacienteControle;
+import br.com.jonjts.assistant.entity.ExameClinico;
+import br.com.jonjts.assistant.persistence.DAO;
+import br.com.jonjts.assistant.entity.Paciente;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
