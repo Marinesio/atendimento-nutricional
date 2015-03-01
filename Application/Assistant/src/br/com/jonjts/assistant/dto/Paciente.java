@@ -7,7 +7,9 @@
 package br.com.jonjts.assistant.dto;
 
 import br.com.jonjts.assistant.persistencia.PacientePersistencia;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.util.Date;
@@ -55,35 +57,19 @@ public class Paciente implements Serializable{
     
     @DatabaseField(columnName = FILD_STATUS, canBeNull = false, defaultValue = "1")
     private Boolean status;
+    
+    @ForeignCollectionField(eager = false)
+    private ForeignCollection<MedicamentoDomiliciar>  medicamentos;
+    
+    @ForeignCollectionField(eager = false)
+    private ForeignCollection<Exercicio> exercicios;
 
     public Paciente() {
         super();
         setStatus(true);
     }
 
-    public Paciente(Long id, String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade, Boolean status) {
-        this.id = id;
-        this.nome = nome;
-        this.sexo = sexo;
-        this.dataNascimento = dataNascimento;
-        this.profissao = profissao;
-        this.objetivoConsulta = objetivoConsulta;
-        this.dataCadastro = dataCadastro;
-        this.escolaridade = escolaridade;
-        this.status = status;
-    }
-
-    public Paciente(String nome, String sexo, Date dataNascimento, String profissao, String objetivoConsulta, Date dataCadastro, String escolaridade, Boolean status) {
-        this.nome = nome;
-        this.sexo = sexo;
-        this.dataNascimento = dataNascimento;
-        this.profissao = profissao;
-        this.objetivoConsulta = objetivoConsulta;
-        this.dataCadastro = dataCadastro;
-        this.escolaridade = escolaridade;
-        this.status = status;
-    }
-
+   
     public Long getId() {
         return id;
     }
@@ -140,6 +126,14 @@ public class Paciente implements Serializable{
         this.dataCadastro = dataCadastro;
     }
 
+    public String getEscolaridade() {
+        return escolaridade;
+    }
+
+    public void setEscolaridade(String escolaridade) {
+        this.escolaridade = escolaridade;
+    }
+
     public Boolean isStatus() {
         return status;
     }
@@ -148,13 +142,22 @@ public class Paciente implements Serializable{
         this.status = status;
     }
 
-    public String getEscolaridade() {
-        return escolaridade;
+    public ForeignCollection<Exercicio> getExercicios() {
+        return exercicios;
     }
 
-    public void setEscolaridade(String escolaridade) {
-        this.escolaridade = escolaridade;
+    public void setExercicios(ForeignCollection<Exercicio> exercicios) {
+        this.exercicios = exercicios;
     }
+
+    public ForeignCollection<MedicamentoDomiliciar> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(ForeignCollection<MedicamentoDomiliciar> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
     
     
 }

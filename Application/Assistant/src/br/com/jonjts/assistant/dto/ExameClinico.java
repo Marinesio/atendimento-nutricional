@@ -7,6 +7,8 @@
 package br.com.jonjts.assistant.dto;
 
 import br.com.jonjts.assistant.persistencia.ExameClinicoPersistencia;
+import com.j256.ormlite.dao.BaseForeignCollection;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
