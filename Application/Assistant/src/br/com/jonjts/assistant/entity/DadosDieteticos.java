@@ -43,6 +43,18 @@ public class DadosDieteticos {
     
     @DatabaseField(columnName = "liquidos_associados")
     private String liquidosAssociados;
+    
+    @DatabaseField(columnName = "restricao_sal")
+    private String restricaoSal;
+    
+    @DatabaseField(columnName = "restricao_acucar")
+    private String restricaoAcucar;
+    
+    @DatabaseField(columnName = "suplemento")
+    private String suplemento;
+
+    public DadosDieteticos() {
+    }
 
     public Long getId() {
         return id;
@@ -116,7 +128,30 @@ public class DadosDieteticos {
         this.liquidosAssociados = liquidosAssociados;
     }
 
-    
+    public String getRestricaoSal() {
+        return restricaoSal;
+    }
+
+    public void setRestricaoSal(String restricaoSal) {
+        this.restricaoSal = restricaoSal;
+    }
+
+    public String getRestricaoAcucar() {
+        return restricaoAcucar;
+    }
+
+    public void setRestricaoAcucar(String restricaoAcucar) {
+        this.restricaoAcucar = restricaoAcucar;
+    }
+
+    public String getSuplemento() {
+        return suplemento;
+    }
+
+    public void setSuplemento(String suplemento) {
+        this.suplemento = suplemento;
+    }
+
     
     
 }
