@@ -278,6 +278,10 @@ public class DadosDieteticosTela extends javax.swing.JFrame implements ITab{
         txtPreferencias.setText("");
         txtIngestaoHidrica.setText("");
         txtSuplementacao.setText("");
+        
+        cbAcucar.setSelectedIndex(1);
+        cbLiqAssociados.setSelectedIndex(1);
+        cbSal.setSelectedIndex(1);
     }
 
     @Override
