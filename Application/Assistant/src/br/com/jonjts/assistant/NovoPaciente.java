@@ -575,10 +575,12 @@ public class NovoPaciente extends Tamplate {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void updateHistoricoClinico(HistoricoClinico historicoClinico) throws Exception {
+        historicoClinico.setIdPaciente(paciente.getId());
         historicoClinicoControle.update(historicoClinico);
     }
 
     public HistoricoClinico insertHistoricoClinico(HistoricoClinico historicoClinico) throws Exception {
+        historicoClinico.setIdPaciente(paciente.getId());
         return historicoClinicoControle.insert(historicoClinico);
     }
 
