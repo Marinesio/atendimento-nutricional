@@ -5,20 +5,18 @@
  */
 package br.com.jonjts.assistant;
 
+import br.com.jonjts.assistant.control.DadosBioquimicosControl;
 import br.com.jonjts.assistant.control.DadosDieteticosControle;
 import br.com.jonjts.assistant.control.ExameClinicoControle;
 import br.com.jonjts.assistant.control.ExameFisicoControle;
 import br.com.jonjts.assistant.control.HistoricoClinicoControle;
 import br.com.jonjts.assistant.control.PacienteControle;
+import br.com.jonjts.assistant.entity.DadosBioquimicos;
 import br.com.jonjts.assistant.entity.DadosDieteticos;
 import br.com.jonjts.assistant.entity.ExameClinico;
 import br.com.jonjts.assistant.entity.ExameFisico;
 import br.com.jonjts.assistant.entity.HistoricoClinico;
 import br.com.jonjts.assistant.entity.Paciente;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.Array;
@@ -46,7 +44,6 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 public class NovoPaciente extends Tamplate {
 
     private Paciente paciente;
-    private HistoricoClinico historicoClinico;
     private Main main;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat sdfHM = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -54,12 +51,14 @@ public class NovoPaciente extends Tamplate {
     private ExameFisicoTela exameFisicoS;
     private DadosDieteticosTela dadosDieteticosTela;
     private HistoricoClinicoTela historicoClinicoTela;
+    private DadosBioquimicosTela dadosBioquimicosTela;
     //BOs
     private PacienteControle pacienteControle = new PacienteControle();
     private HistoricoClinicoControle historicoClinicoControle = new HistoricoClinicoControle();
     private ExameClinicoControle exameClinicoControle = new ExameClinicoControle();
     private ExameFisicoControle exameFisicoControle = new ExameFisicoControle();
     private DadosDieteticosControle dadosDieteticosControle = new DadosDieteticosControle();
+    private DadosBioquimicosControl dadosBioquimicosControl = new DadosBioquimicosControl();
 
     private List<ExameClinico> allExameClinico;
 
@@ -188,6 +187,31 @@ public class NovoPaciente extends Tamplate {
         }
     }
 
+    private void loadDadosBioquimicos() {
+        try {
+            ExameClinico selectedItem = (ExameClinico) cbExameClinico.getSelectedItem();
+            if (selectedItem != null && selectedItem.getData() != null && selectedItem.getId() != null) {
+                DadosBioquimicos get = dadosBioquimicosControl.get(selectedItem.getId());
+                if (get != null) {
+                    dadosBioquimicosTela.setDadosBioquimicos(get);
+                    dadosBioquimicosTela.loadData();
+                } else {
+                    limparTelaDadosBioquimicos();
+                }
+            } else {
+                limparTelaDadosBioquimicos();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar Daos Bioquímicos");
+            Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void limparTelaDadosBioquimicos() {
+        dadosBioquimicosTela.setDadosBioquimicos(null);
+        dadosBioquimicosTela.clearData();
+    }
+
     private void limparTelaExameFisico() {
         exameFisicoS.setExameFisico(null);
         exameFisicoS.clearData();
@@ -220,7 +244,7 @@ public class NovoPaciente extends Tamplate {
         super.fixLayout(); //To change body of generated methods, choose Tools | Templates.
         String title = ((paciente == null) ? "Novo Paciente" : paciente.getNome());
         setTitle(title);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);  
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -261,6 +285,10 @@ public class NovoPaciente extends Tamplate {
         dadosDieteticosTela = new DadosDieteticosTela(this);
         jPanel3.add(dadosDieteticosTela.getRootPane());
         jButton2 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        dadosBioquimicosTela = new DadosBioquimicosTela(this);
+        jPanel4.add(dadosBioquimicosTela.getRootPane());
+        btnSalvarDadosBioquimicos = new javax.swing.JButton();
         lblDtCadastro = new javax.swing.JLabel();
         cbExameClinico = new javax.swing.JComboBox();
 
@@ -465,6 +493,32 @@ public class NovoPaciente extends Tamplate {
 
         tbpPaciente.addTab("Dados Dietéticos", jPanel3);
 
+        btnSalvarDadosBioquimicos.setText("Salvar Dados Bioquímicos");
+        btnSalvarDadosBioquimicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarDadosBioquimicosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(679, Short.MAX_VALUE)
+                .addComponent(btnSalvarDadosBioquimicos)
+                .addGap(43, 43, 43))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(520, Short.MAX_VALUE)
+                .addComponent(btnSalvarDadosBioquimicos)
+                .addContainerGap())
+        );
+
+        tbpPaciente.addTab("Exames Bioquímicos", jPanel4);
+
         cbExameClinico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbExameClinicoActionPerformed(evt);
@@ -560,6 +614,7 @@ public class NovoPaciente extends Tamplate {
     private void cbExameClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExameClinicoActionPerformed
         loadExameFisico();
         loadDadosDieteticos();
+        loadDadosBioquimicos();
     }//GEN-LAST:event_cbExameClinicoActionPerformed
 
     private void btnSalvarExameFisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarExameFisicoActionPerformed
@@ -573,6 +628,22 @@ public class NovoPaciente extends Tamplate {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         historicoClinicoTela.save();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnSalvarDadosBioquimicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarDadosBioquimicosActionPerformed
+        dadosBioquimicosTela.save();
+    }//GEN-LAST:event_btnSalvarDadosBioquimicosActionPerformed
+
+    public DadosBioquimicos insertDadosBioquimicos(DadosBioquimicos bioquimicos) throws Exception {
+        saveExameExameClinico();
+        bioquimicos.setIdExameClinico(((ExameClinico) cbExameClinico.getSelectedItem()).getId());
+        bioquimicos.setIdPaciente(paciente.getId());
+        return dadosBioquimicosControl.insert(bioquimicos);
+    }
+
+    public void updateDadosBioquimicos(DadosBioquimicos bioquimicos) throws Exception {
+        saveExameExameClinico();
+        dadosBioquimicosControl.update(bioquimicos);
+    }
 
     public void updateHistoricoClinico(HistoricoClinico historicoClinico) throws Exception {
         historicoClinico.setIdPaciente(paciente.getId());
@@ -701,6 +772,7 @@ public class NovoPaciente extends Tamplate {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvarDadosBioquimicos;
     private javax.swing.JToggleButton btnSalvarExameFisico;
     private javax.swing.JComboBox cbEscolaridade;
     private javax.swing.JComboBox cbExameClinico;
@@ -718,6 +790,7 @@ public class NovoPaciente extends Tamplate {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDtCadastro;
     private javax.swing.JLabel lblIdadePaciente;
@@ -729,5 +802,4 @@ public class NovoPaciente extends Tamplate {
     private javax.swing.JTextField txtProfissao;
     // End of variables declaration//GEN-END:variables
 
-    
 }

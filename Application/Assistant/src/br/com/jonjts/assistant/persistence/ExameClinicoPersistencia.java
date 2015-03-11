@@ -7,8 +7,6 @@
 package br.com.jonjts.assistant.persistence;
 
 import br.com.jonjts.assistant.entity.ExameClinico;
-import br.com.jonjts.assistant.entity.Paciente;
-import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 
 /**
