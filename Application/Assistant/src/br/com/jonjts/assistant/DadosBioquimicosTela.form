@@ -656,7 +656,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel30">
       <Properties>
-        <Property name="text" type="java.lang.String" value="37 a 52%"/>
+        <Property name="text" type="java.lang.String" value="37% a 52%"/>
         <Property name="toolTipText" type="java.lang.String" value="37 a 52%"/>
       </Properties>
     </Component>
@@ -704,7 +704,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel38">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt; 145mg/dL"/>
+        <Property name="text" type="java.lang.String" value="&lt; 180mg/dL"/>
         <Property name="toolTipText" type="java.lang.String" value="&lt; 145mg/dL"/>
       </Properties>
     </Component>

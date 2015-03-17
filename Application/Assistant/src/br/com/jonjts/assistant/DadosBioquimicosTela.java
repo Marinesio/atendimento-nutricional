@@ -287,7 +287,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel29.setText("12.0 a 18,0 g/dL");
         jLabel29.setToolTipText("12.0 a 18,0 g/dL");
 
-        jLabel30.setText("37 a 52%");
+        jLabel30.setText("37% a 52%");
         jLabel30.setToolTipText("37 a 52%");
 
         jLabel31.setText("Homens adultos: 4,6 a 6,2 milhões; Mulheres adultas: 4,2 a 5,4 milhões; Crianças: 3,8 a 5,5 milhões");
@@ -311,7 +311,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel37.setText("70 a 99 mg/dL");
         jLabel37.setToolTipText("70 a 99 mg/dL");
 
-        jLabel38.setText("< 145mg/dL");
+        jLabel38.setText("< 180mg/dL");
         jLabel38.setToolTipText("< 145mg/dL");
 
         jLabel39.setText("40-160 ug/dL");
@@ -969,7 +969,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         return list;
     }
 
-    private void checkAllTextFilds(){
+    private void checkAllTextFilds() {
         checkColesterolTotal();
         checkCreatina();
         checkFerritina();
@@ -987,13 +987,13 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         checkTriglicerideos();
         checkUreia();
     }
-    
+
     private void checkHematrocrito() {
         String text = txtHematocrito.getText();
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble >= 37 && parseDouble <= 52) {
-                txtHematocrito.setForeground(Color.GREEN);
+                txtHematocrito.setForeground(Color.black);
             } else {
                 txtHematocrito.setForeground(Color.RED);
             }
@@ -1002,48 +1002,42 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         }
     }
 
-    private void checkHemacias(){
+    private void checkHemacias() {
         String text = txtHemacias.getText();
-        if(!text.isEmpty()){
+        if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
-            if(isGuri()){
-                if(parseDouble >= 3.8 && parseDouble <= 5.5){
-                    txtHemacias.setForeground(Color.GREEN);
-                } else if(parseDouble == 0){
-                    txtHemacias.setForeground(Color.BLACK);
-                }else{
+            if (isGuri()) {
+                if (parseDouble >= 3.8 && parseDouble <= 5.5) {
+                    txtHemacias.setForeground(Color.black);
+                } else {
                     txtHemacias.setForeground(Color.red);
                 }
-            }else{
-                if(isMacho()){
-                    if(parseDouble >= 4.6 && parseDouble <= 6.2){
-                        txtHemacias.setForeground(Color.GREEN);
-                    }else if(parseDouble == 0){
+            } else {
+                if (isMacho()) {
+                    if (parseDouble >= 4.6 && parseDouble <= 6.2) {
                         txtHemacias.setForeground(Color.black);
-                    }else{
+                    } else {
                         txtHemacias.setForeground(Color.red);
                     }
-                }else{
-                    if(parseDouble >= 4.2 && parseDouble <= 5.4){
-                        txtHemacias.setForeground(Color.GREEN);
-                    }else if(parseDouble == 0){
+                } else {
+                    if (parseDouble >= 4.2 && parseDouble <= 5.4) {
                         txtHemacias.setForeground(Color.black);
-                    }else{
+                    } else {
                         txtHemacias.setForeground(Color.red);
                     }
                 }
             }
-        }else{
+        } else {
             txtHemacias.setForeground(Color.black);
         }
     }
-    
+
     private void checkHemaglobina() {
         String text = txtHemoglobina.getText();
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble >= 12 && parseDouble <= 18) {
-                txtHemoglobina.setForeground(Color.GREEN);
+                txtHemoglobina.setForeground(Color.black);
             } else {
                 txtHemoglobina.setForeground(Color.red);
             }
@@ -1057,7 +1051,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble >= 150.000 && parseDouble <= 450.000) {
-                txtPlaquetas.setForeground(Color.green);
+                txtPlaquetas.setForeground(Color.black);
             } else {
                 txtPlaquetas.setForeground(Color.red);
             }
@@ -1072,13 +1066,13 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
             double parseDouble = Double.parseDouble(text);
             if (isMacho()) {
                 if (parseDouble >= 29 && parseDouble <= 397) {
-                    txtFerretina.setForeground(Color.GREEN);
+                    txtFerretina.setForeground(Color.black);
                 } else {
                     txtFerretina.setForeground(Color.red);
                 }
             } else {
                 if (parseDouble >= 6 && parseDouble <= 159) {
-                    txtFerretina.setForeground(Color.GREEN);
+                    txtFerretina.setForeground(Color.black);
                 } else {
                     txtFerretina.setForeground(Color.red);
                 }
@@ -1093,7 +1087,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble >= 40 && parseDouble <= 160) {
-                txtFerroSerico.setForeground(Color.GREEN);
+                txtFerroSerico.setForeground(Color.black);
             } else {
                 txtFerroSerico.setForeground(Color.red);
             }
@@ -1107,7 +1101,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble < 200) {
-                txtColesterolTotal.setForeground(Color.GREEN);
+                txtColesterolTotal.setForeground(Color.black);
             } else if (parseDouble > 240) {
                 txtColesterolTotal.setForeground(Color.red);
             } else {
@@ -1123,7 +1117,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble < 130) {
-                txtLDL.setForeground(Color.GREEN);
+                txtLDL.setForeground(Color.black);
             } else if (parseDouble > 160) {
                 txtLDL.setForeground(Color.red);
             } else {
@@ -1143,7 +1137,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
             } else if (parseDouble == 0) {
                 txtHDL.setForeground(Color.BLACK);
             } else {
-                txtHDL.setForeground(Color.GREEN);
+                txtHDL.setForeground(Color.black);
             }
         } else {
             txtHDL.setForeground(Color.BLACK);
@@ -1155,7 +1149,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble >= 70 && parseDouble <= 99) {
-                txtGlicoseJejum.setForeground(Color.green);
+                txtGlicoseJejum.setForeground(Color.black);
             } else if (parseDouble == 0) {
                 txtGlicoseJejum.setForeground(Color.black);
             } else {
@@ -1171,7 +1165,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble < 200) {
-                txtTriglicerideos.setForeground(Color.green);
+                txtTriglicerideos.setForeground(Color.black);
             } else if (parseDouble > 400) {
                 txtTriglicerideos.setForeground(Color.red);
             } else {
@@ -1186,9 +1180,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         String text = txtGlicosePosPrandial.getText();
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
-            if (parseDouble < 1800) {
-                txtGlicosePosPrandial.setForeground(Color.green);
-            } else if (parseDouble == 0) {
+            if (parseDouble < 180) {
                 txtGlicosePosPrandial.setForeground(Color.black);
             } else {
                 txtGlicosePosPrandial.setForeground(Color.red);
@@ -1203,8 +1195,6 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble >= 15 && parseDouble <= 56) {
-                txtUreia.setForeground(Color.green);
-            } else if (parseDouble == 0) {
                 txtUreia.setForeground(Color.black);
             } else {
                 txtUreia.setForeground(Color.red);
@@ -1220,19 +1210,16 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
             double parseDouble = Double.parseDouble(text);
             if (isMacho()) {
                 if (parseDouble >= 0.62 && parseDouble <= 1.25) {
-                    txtCreatinina.setForeground(Color.GREEN);
+                    txtCreatinina.setForeground(Color.black);
                 } else {
                     txtCreatinina.setForeground(Color.red);
                 }
             } else {
                 if (parseDouble >= 0.57 && parseDouble <= 1.11) {
-                    txtCreatinina.setForeground(Color.GREEN);
+                    txtCreatinina.setForeground(Color.black);
                 } else {
                     txtCreatinina.setForeground(Color.red);
                 }
-            }
-            if (parseDouble == 0) {
-                txtCreatinina.setForeground(Color.black);
             }
         } else {
             txtCreatinina.setForeground(Color.black);
@@ -1244,8 +1231,6 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble == 38) {
-                txtTGO.setForeground(Color.GREEN);
-            } else if (parseDouble == 0) {
                 txtTGO.setForeground(Color.black);
             } else {
                 txtTGO.setForeground(Color.red);
@@ -1260,8 +1245,6 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         if (!text.isEmpty()) {
             double parseDouble = Double.parseDouble(text);
             if (parseDouble == 41) {
-                txtTGP.setForeground(Color.green);
-            } else if (parseDouble == 0) {
                 txtTGP.setForeground(Color.black);
             } else {
                 txtTGP.setForeground(Color.red);
@@ -1276,19 +1259,26 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
     }
 
     private boolean isGuri() {
-        Date dt = novoPaciente.getPaciente().getDataNascimento();
-        Date date = new Date();
-
-        int yearP = dt.getYear();
-        int year = date.getYear();
-
-        int idade = year - yearP;
-
-        dt.setYear(date.getYear());
-        if (!dt.before(date)) {
-            idade -= 1;
+        try {
+            Date dt = novoPaciente.getPaciente().getDataNascimento();
+            String format = sdf.format(dt);
+            Date parse = sdf.parse(format);
+            Date date = new Date();
+            
+            int yearP = parse.getYear();
+            int year = date.getYear();
+            
+            int idade = year - yearP;
+            
+            parse.setYear(date.getYear());
+            if (!parse.before(date)) {
+                idade -= 1;
+            }
+            return idade <= 12;
+        } catch (ParseException ex) {
+            Logger.getLogger(DadosBioquimicosTela.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return idade <= 12;
+        return false;
     }
 
     private boolean isMacho() {
