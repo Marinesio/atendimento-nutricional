@@ -5,6 +5,7 @@
  */
 package br.com.jonjts.assistant.persistence;
 
+import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;

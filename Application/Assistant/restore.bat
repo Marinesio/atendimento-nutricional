@@ -1,0 +1,1 @@
+"C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql.exe" -v -v -v --host=localhost --user=root --password=jonas --port=3306 --protocol=tcp --force assistant < C:\Users\Jonas\Documents\backup.ast

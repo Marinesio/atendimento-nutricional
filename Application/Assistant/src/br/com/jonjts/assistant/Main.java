@@ -163,6 +163,8 @@ public class Main extends Tamplate {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPacientes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -174,6 +176,13 @@ public class Main extends Tamplate {
         mbAssistant = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(731, 360));
@@ -253,6 +262,26 @@ public class Main extends Tamplate {
         jMenu1.add(jMenuItem1);
 
         mbAssistant.add(jMenu1);
+
+        jMenu2.setText("Avançado");
+
+        jMenuItem4.setText("Fazer Backup");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Restaurar Backup");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        mbAssistant.add(jMenu2);
 
         setJMenuBar(mbAssistant);
 
@@ -360,6 +389,7 @@ public class Main extends Tamplate {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            btnExcluir.setEnabled(false);
             search();
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -368,6 +398,16 @@ public class Main extends Tamplate {
         RestorePacienteTela pacienteTela = new RestorePacienteTela(this);
         pacienteTela.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        BackupTela backupTela = new BackupTela(this);
+        backupTela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        RestaurarTela restaurarTela = new RestaurarTela(this);
+        restaurarTela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     public JButton getBtnCarregarPaciente() {
         return btnCarregarPaciente;
@@ -439,7 +479,12 @@ public class Main extends Tamplate {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar mbAssistant;
     private javax.swing.JTable tbPacientes;
