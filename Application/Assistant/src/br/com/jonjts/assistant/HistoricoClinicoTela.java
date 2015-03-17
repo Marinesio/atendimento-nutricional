@@ -26,11 +26,9 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
 
     private NovoPaciente novoPaciente;
     private HistoricoClinico historicoClinico;
-    private final Paciente paciente;
 
     public HistoricoClinicoTela(NovoPaciente novoPaciente) {
         this.novoPaciente = novoPaciente;
-        paciente = novoPaciente.getPaciente();
         initComponents();
         disableAll();
         enableUpdateExercicios();
@@ -54,7 +52,7 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
                         medicamento.setFrequencia(frequencia);
                         medicamento.setNome(nome);
 
-                        paciente.getMedicamentos().update(medicamento);
+                        novoPaciente.getPaciente().getMedicamentos().update(medicamento);
                     } catch (SQLException ex) {
                         Logger.getLogger(HistoricoClinicoTela.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -83,8 +81,8 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
                         exercicio.setFrequencia(frequencia);
                         exercicio.setTipo(tipo);
 
-                        paciente.getExercicios().update(exercicio);
-                    } catch (SQLException ex) {
+                        novoPaciente.getPaciente().getExercicios().update(exercicio);
+                    } catch (SQLException ex) { 
                         Logger.getLogger(HistoricoClinicoTela.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
@@ -432,12 +430,13 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
     private void btnAddExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddExercicioActionPerformed
         getTableExercicioModel().addRow(new Object[]{});
         Exercicio exercicio = new Exercicio();
+        final Paciente paciente = novoPaciente.getPaciente();
         exercicio.setPaciente(paciente);
         paciente.getExercicios().add(exercicio);
     }//GEN-LAST:event_btnAddExercicioActionPerformed
 
     private void btnAddMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMedActionPerformed
-        paciente.getMedicamentos().add(new MedicamentoDomiliciar());
+        novoPaciente.getPaciente().getMedicamentos().add(new MedicamentoDomiliciar());
         getTableMedicamentosModel().addRow(new Object[]{});
     }//GEN-LAST:event_btnAddMedActionPerformed
 
@@ -445,7 +444,7 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
         int selectedRow = tbMedicamentos.getSelectedRow();
         if (selectedRow >= 0) {
             MedicamentoDomiliciar medicamento = (MedicamentoDomiliciar) getMedicamento(selectedRow);
-            boolean remove = paciente.getMedicamentos().remove(medicamento);
+            boolean remove = novoPaciente.getPaciente().getMedicamentos().remove(medicamento);
             if (remove) {
                 getTableMedicamentosModel().removeRow(selectedRow);
             }
@@ -456,7 +455,7 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
         int selectedRow = tbExercicio.getSelectedRow();
         if (selectedRow >= 0) {
             Exercicio ex = (Exercicio) getExercicio(selectedRow);
-            boolean remove = paciente.getExercicios().remove(ex);
+            boolean remove = novoPaciente.getPaciente().getExercicios().remove(ex);
             if (remove) {
                 getTableExercicioModel().removeRow(selectedRow);
             }
@@ -598,8 +597,8 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
-        if (paciente.getExercicios() != null) {
-            for (Exercicio e : paciente.getExercicios()) {
+        if (novoPaciente.getPaciente().getExercicios() != null) {
+            for (Exercicio e : novoPaciente.getPaciente().getExercicios()) {
                 model.addRow(new Object[]{e.getTipo(), e.getFrequencia(), e.getDuracao()});
             }
         }
@@ -610,8 +609,8 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
-        if (paciente.getMedicamentos() != null) {
-            for (MedicamentoDomiliciar md : paciente.getMedicamentos()) {
+        if (novoPaciente.getPaciente().getMedicamentos() != null) {
+            for (MedicamentoDomiliciar md : novoPaciente.getPaciente().getMedicamentos()) {
                 model.addRow(new Object[]{md.getNome(), md.getFrequencia()});
             }
         }
@@ -636,12 +635,12 @@ public class HistoricoClinicoTela extends javax.swing.JFrame implements ITab {
     }
 
     private MedicamentoDomiliciar getMedicamento(int indice) {
-        Object[] toArray = paciente.getMedicamentos().toArray();
+        Object[] toArray = novoPaciente.getPaciente().getMedicamentos().toArray();
         return (MedicamentoDomiliciar) toArray[indice];
     }
 
     private Exercicio getExercicio(int indice) {
-        Object[] toArray = paciente.getExercicios().toArray();
+        Object[] toArray = novoPaciente.getPaciente().getExercicios().toArray();
         return (Exercicio) toArray[indice];
     }
 }

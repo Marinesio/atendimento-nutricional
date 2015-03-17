@@ -43,7 +43,9 @@ public class ExameClinicoControle implements IControle<ExameClinico>{
 
     @Override
     public List<ExameClinico> getAll() throws Exception {
-        return getExameClinicoDAO().listAll();
+        QueryBuilder<ExameClinico, Long> queryBuilder = getExameClinicoDAO().queryBuilder();
+        queryBuilder.orderBy("data", false);
+        return queryBuilder.query();
     }
 
     @Override

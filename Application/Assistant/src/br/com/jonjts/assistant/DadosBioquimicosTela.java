@@ -5,14 +5,26 @@
  */
 package br.com.jonjts.assistant;
 
+import br.com.jonjts.assistant.control.ExamesBioquimicosExtrasControl;
 import br.com.jonjts.assistant.entity.DadosBioquimicos;
+import br.com.jonjts.assistant.entity.ExameClinico;
+import br.com.jonjts.assistant.entity.ExamesBioquimicosExtras;
+import br.com.jonjts.assistant.entity.Paciente;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,10 +35,14 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
 
     private NovoPaciente novoPaciente;
     private DadosBioquimicos dadosBioquimicos;
+    private ExamesBioquimicosExtrasControl examesBioquimicosExtrasControl = new ExamesBioquimicosExtrasControl();
+    private List<ExamesBioquimicosExtras> bioquimicosExtras = new ArrayList<ExamesBioquimicosExtras>();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public DadosBioquimicosTela(NovoPaciente novoPaciente) {
         this.novoPaciente = novoPaciente;
         initComponents();
+        setOnUpdateGrid();
     }
 
     /**
@@ -117,84 +133,154 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel1.setText("Hemoglobina (HGB):");
 
         txtHemoglobina.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHemoglobina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHemoglobinaKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("g/dL");
 
         jLabel3.setText("Hematócrito (HCT):");
 
         txtHematocrito.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHematocrito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHematocritoKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("%");
 
         jLabel5.setText("Hemácias:");
 
         txtHemacias.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHemacias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHemaciasKeyReleased(evt);
+            }
+        });
 
         jLabel6.setText("milhões");
 
         jLabel7.setText("Plaquetas:");
 
         txtPlaquetas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPlaquetas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPlaquetasKeyReleased(evt);
+            }
+        });
 
         jLabel8.setText("mm³");
 
         jLabel9.setText("Colesterol Total:");
 
         txtColesterolTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtColesterolTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtColesterolTotalKeyReleased(evt);
+            }
+        });
 
         jLabel10.setText("mg/dl");
 
         jLabel11.setText("LDL:");
 
         txtLDL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtLDL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLDLKeyReleased(evt);
+            }
+        });
 
         jLabel12.setText("mg/dL");
 
         jLabel13.setText("HDL:");
 
         txtHDL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHDL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHDLKeyReleased(evt);
+            }
+        });
 
         jLabel14.setText("mg/dL");
 
         jLabel15.setText("Triglicerídeos:");
 
         txtTriglicerideos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTriglicerideos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTriglicerideosKeyReleased(evt);
+            }
+        });
 
         jLabel16.setText("mg/dL");
 
         jLabel17.setText("Glicose de Jejum:");
 
         txtGlicosePosPrandial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGlicosePosPrandial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGlicosePosPrandialKeyReleased(evt);
+            }
+        });
 
         jLabel18.setText("mg/dL");
 
         jLabel19.setText("Glicose pós-prandial:");
 
         txtGlicoseJejum.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGlicoseJejum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGlicoseJejumKeyReleased(evt);
+            }
+        });
 
         jLabel20.setText("mg/dL");
 
         jLabel21.setText("Ferro sérico:");
 
         txtFerroSerico.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFerroSerico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFerroSericoKeyReleased(evt);
+            }
+        });
 
         jLabel22.setText("ug/dL");
 
         jLabel23.setText("Ferritina:");
 
         txtFerretina.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFerretina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFerretinaKeyReleased(evt);
+            }
+        });
 
         jLabel24.setText("ng/ml");
 
         jLabel25.setText("Uréia:");
 
         txtUreia.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtUreia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUreiaKeyReleased(evt);
+            }
+        });
 
         jLabel26.setText("mg/dL");
 
         jLabel27.setText("Creatinina:");
 
         txtCreatinina.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCreatinina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCreatininaKeyReleased(evt);
+            }
+        });
 
         jLabel28.setText("mg/dL");
 
@@ -204,8 +290,8 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel30.setText("37 a 52%");
         jLabel30.setToolTipText("37 a 52%");
 
-        jLabel31.setText("Homens adultos: 4,6 a 6,2 milhões Mulheres adultas: 4,2 a 5,4 milhões Crianças: 3,8 a 5,5 milhões");
-        jLabel31.setToolTipText("Homens adultos: 4,6 a 6,2 milhões\nMulheres adultas: 4,2 a 5,4 milhões\nCrianças: 3,8 a 5,5 milhões");
+        jLabel31.setText("Homens adultos: 4,6 a 6,2 milhões; Mulheres adultas: 4,2 a 5,4 milhões; Crianças: 3,8 a 5,5 milhões");
+        jLabel31.setToolTipText("Homens adultos: 4.6 a 6.2 milhões\nMulheres adultas: 4.2 a 5.4 milhões\nCrianças: 3.8 a 5.5 milhões");
 
         jLabel32.setText("150.000 a 450.000 mm³");
         jLabel32.setToolTipText("150.000 a 450.000 mm³");
@@ -243,6 +329,11 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel44.setText("TGO:");
 
         txtTGO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTGO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTGOKeyReleased(evt);
+            }
+        });
 
         jLabel45.setText("U/L");
 
@@ -251,6 +342,11 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel47.setText("TGP:");
 
         txtTGP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTGP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTGPKeyReleased(evt);
+            }
+        });
 
         jLabel48.setText("U/L");
 
@@ -277,8 +373,18 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         jLabel43.setText("Extras:");
 
         btnAddTable.setText("+");
+        btnAddTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTableActionPerformed(evt);
+            }
+        });
 
         btnRemoveTable.setText("-");
+        btnRemoveTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -469,7 +575,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
                                 .addComponent(btnAddTable)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemoveTable)))))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtTriglicerideos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -528,6 +634,83 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTableActionPerformed
+        getTableModelExtras().addRow(new Object[]{});
+        bioquimicosExtras.add(new ExamesBioquimicosExtras());
+    }//GEN-LAST:event_btnAddTableActionPerformed
+
+    private void btnRemoveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTableActionPerformed
+        int selectedRow = tbExtras.getSelectedRow();
+        if (selectedRow >= 0) {
+            getTableModelExtras().removeRow(selectedRow);
+            bioquimicosExtras.remove(selectedRow);
+        }
+    }//GEN-LAST:event_btnRemoveTableActionPerformed
+
+    private void txtHemoglobinaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHemoglobinaKeyReleased
+        checkHemaglobina();
+    }//GEN-LAST:event_txtHemoglobinaKeyReleased
+
+    private void txtHematocritoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHematocritoKeyReleased
+        checkHematrocrito();
+    }//GEN-LAST:event_txtHematocritoKeyReleased
+
+    private void txtHemaciasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHemaciasKeyReleased
+        checkHemacias();
+    }//GEN-LAST:event_txtHemaciasKeyReleased
+
+    private void txtPlaquetasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlaquetasKeyReleased
+        checkPlaquetas();
+    }//GEN-LAST:event_txtPlaquetasKeyReleased
+
+    private void txtColesterolTotalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColesterolTotalKeyReleased
+        checkColesterolTotal();
+    }//GEN-LAST:event_txtColesterolTotalKeyReleased
+
+    private void txtLDLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLDLKeyReleased
+        checkLdl();
+    }//GEN-LAST:event_txtLDLKeyReleased
+
+    private void txtHDLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHDLKeyReleased
+        checkHDL();
+    }//GEN-LAST:event_txtHDLKeyReleased
+
+    private void txtTriglicerideosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTriglicerideosKeyReleased
+        checkTriglicerideos();
+    }//GEN-LAST:event_txtTriglicerideosKeyReleased
+
+    private void txtGlicoseJejumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGlicoseJejumKeyReleased
+        checkGlicoseJejum();
+    }//GEN-LAST:event_txtGlicoseJejumKeyReleased
+
+    private void txtGlicosePosPrandialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGlicosePosPrandialKeyReleased
+        checkGlicosePos();
+    }//GEN-LAST:event_txtGlicosePosPrandialKeyReleased
+
+    private void txtFerroSericoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFerroSericoKeyReleased
+        checkFerroSerico();
+    }//GEN-LAST:event_txtFerroSericoKeyReleased
+
+    private void txtFerretinaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFerretinaKeyReleased
+        checkFerritina();
+    }//GEN-LAST:event_txtFerretinaKeyReleased
+
+    private void txtUreiaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUreiaKeyReleased
+        checkUreia();
+    }//GEN-LAST:event_txtUreiaKeyReleased
+
+    private void txtCreatininaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCreatininaKeyReleased
+        checkCreatina();
+    }//GEN-LAST:event_txtCreatininaKeyReleased
+
+    private void txtTGOKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTGOKeyReleased
+        checkTGO();
+    }//GEN-LAST:event_txtTGOKeyReleased
+
+    private void txtTGPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTGPKeyReleased
+        checkTGP();
+    }//GEN-LAST:event_txtTGPKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -618,7 +801,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
     private void update() {
         try {
             bindDadosQuimicos();
-            novoPaciente.updateDadosBioquimicos(dadosBioquimicos);
+            novoPaciente.updateDadosBioquimicos(dadosBioquimicos, bioquimicosExtras);
             JOptionPane.showMessageDialog(null, "Salvo");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar dados bioquímicos");
@@ -630,7 +813,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         try {
             dadosBioquimicos = new DadosBioquimicos();
             bindDadosQuimicos();
-            dadosBioquimicos = novoPaciente.insertDadosBioquimicos(dadosBioquimicos);
+            dadosBioquimicos = novoPaciente.insertDadosBioquimicos(dadosBioquimicos, bioquimicosExtras);
             JOptionPane.showMessageDialog(null, "Salvo");
         } catch (Exception ex) {
             dadosBioquimicos = null;
@@ -657,6 +840,10 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         txtTGP.setText("");
         txtTriglicerideos.setText("");
         txtUreia.setText("");
+        clearGrid();
+    }
+
+    private void clearGrid() {
         DefaultTableModel model = getTableModelExtras();
         while (model.getRowCount() > 0) {
             model.removeRow(0);
@@ -697,6 +884,8 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         txtTriglicerideos.setText(triglicerideos == null ? "" : triglicerideos + "");
         final Double ureia = dadosBioquimicos.getUreia();
         txtUreia.setText(ureia == null ? "" : ureia + "");
+
+        loadGrid();
     }
 
     private void bindDadosQuimicos() {
@@ -734,6 +923,71 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         dadosBioquimicos.setUreia(ureia.isEmpty() ? null : Double.parseDouble(ureia));
     }
 
+    private void loadGrid() {
+        final Long idExameClinico = dadosBioquimicos.getIdExameClinico();
+        try {
+            bioquimicosExtras = examesBioquimicosExtrasControl.get(idExameClinico.longValue());
+            DefaultTableModel tableModelExtras = getTableModelExtras();
+            clearGrid();
+            for (ExamesBioquimicosExtras extras : bioquimicosExtras) {
+                tableModelExtras.addRow(new Object[]{extras.getNome(), extras.getResultado(), extras.getReferencia()});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar exames bioquimicos extras.");
+            Logger.getLogger(DadosBioquimicosTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void setOnUpdateGrid() {
+        getTableModelExtras().addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == e.UPDATE) {
+                    final int row = e.getFirstRow();
+                    DefaultTableModel tableModelExtras = getTableModelExtras();
+
+                    String nome = (String) tableModelExtras.getValueAt(row, 0);
+                    String resultado = (String) tableModelExtras.getValueAt(row, 1);
+                    String referencia = (String) tableModelExtras.getValueAt(row, 2);
+
+                    ExamesBioquimicosExtras get = bioquimicosExtras.get(row);
+                    get.setId(null);
+                    get.setNome(nome);
+                    get.setReferencia(referencia);
+                    get.setResultado(resultado);
+                }
+            }
+        });
+    }
+
+    public List<ExamesBioquimicosExtras> bindGrid(Paciente paciente, ExameClinico exameClinico, List<ExamesBioquimicosExtras> list) {
+        for (ExamesBioquimicosExtras extras : list) {
+            extras.setPaciente(paciente);
+            extras.setExameClinico(exameClinico);
+        }
+        return list;
+    }
+
+    private void checkAllTextFilds(){
+        checkColesterolTotal();
+        checkCreatina();
+        checkFerritina();
+        checkFerroSerico();
+        checkGlicoseJejum();
+        checkGlicosePos();
+        checkHDL();
+        checkHemacias();
+        checkHemaglobina();
+        checkHematrocrito();
+        checkLdl();
+        checkPlaquetas();
+        checkTGO();
+        checkTGP();
+        checkTriglicerideos();
+        checkUreia();
+    }
+    
     private void checkHematrocrito() {
         String text = txtHematocrito.getText();
         if (!text.isEmpty()) {
@@ -748,6 +1002,42 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         }
     }
 
+    private void checkHemacias(){
+        String text = txtHemacias.getText();
+        if(!text.isEmpty()){
+            double parseDouble = Double.parseDouble(text);
+            if(isGuri()){
+                if(parseDouble >= 3.8 && parseDouble <= 5.5){
+                    txtHemacias.setForeground(Color.GREEN);
+                } else if(parseDouble == 0){
+                    txtHemacias.setForeground(Color.BLACK);
+                }else{
+                    txtHemacias.setForeground(Color.red);
+                }
+            }else{
+                if(isMacho()){
+                    if(parseDouble >= 4.6 && parseDouble <= 6.2){
+                        txtHemacias.setForeground(Color.GREEN);
+                    }else if(parseDouble == 0){
+                        txtHemacias.setForeground(Color.black);
+                    }else{
+                        txtHemacias.setForeground(Color.red);
+                    }
+                }else{
+                    if(parseDouble >= 4.2 && parseDouble <= 5.4){
+                        txtHemacias.setForeground(Color.GREEN);
+                    }else if(parseDouble == 0){
+                        txtHemacias.setForeground(Color.black);
+                    }else{
+                        txtHemacias.setForeground(Color.red);
+                    }
+                }
+            }
+        }else{
+            txtHemacias.setForeground(Color.black);
+        }
+    }
+    
     private void checkHemaglobina() {
         String text = txtHemoglobina.getText();
         if (!text.isEmpty()) {
@@ -844,6 +1134,38 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         }
     }
 
+    private void checkHDL() {
+        String text = txtHDL.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (parseDouble <= 34 || parseDouble >= 60) {
+                txtHDL.setForeground(Color.red);
+            } else if (parseDouble == 0) {
+                txtHDL.setForeground(Color.BLACK);
+            } else {
+                txtHDL.setForeground(Color.GREEN);
+            }
+        } else {
+            txtHDL.setForeground(Color.BLACK);
+        }
+    }
+
+    private void checkGlicoseJejum() {
+        String text = txtGlicoseJejum.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (parseDouble >= 70 && parseDouble <= 99) {
+                txtGlicoseJejum.setForeground(Color.green);
+            } else if (parseDouble == 0) {
+                txtGlicoseJejum.setForeground(Color.black);
+            } else {
+                txtGlicoseJejum.setForeground(Color.red);
+            }
+        } else {
+            txtGlicoseJejum.setForeground(Color.black);
+        }
+    }
+
     private void checkTriglicerideos() {
         String text = txtTriglicerideos.getText();
         if (!text.isEmpty()) {
@@ -860,8 +1182,113 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
         }
     }
 
+    private void checkGlicosePos() {
+        String text = txtGlicosePosPrandial.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (parseDouble < 1800) {
+                txtGlicosePosPrandial.setForeground(Color.green);
+            } else if (parseDouble == 0) {
+                txtGlicosePosPrandial.setForeground(Color.black);
+            } else {
+                txtGlicosePosPrandial.setForeground(Color.red);
+            }
+        } else {
+            txtGlicosePosPrandial.setForeground(Color.black);
+        }
+    }
+
+    private void checkUreia() {
+        String text = txtUreia.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (parseDouble >= 15 && parseDouble <= 56) {
+                txtUreia.setForeground(Color.green);
+            } else if (parseDouble == 0) {
+                txtUreia.setForeground(Color.black);
+            } else {
+                txtUreia.setForeground(Color.red);
+            }
+        } else {
+            txtUreia.setForeground(Color.black);
+        }
+    }
+
+    private void checkCreatina() {
+        String text = txtCreatinina.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (isMacho()) {
+                if (parseDouble >= 0.62 && parseDouble <= 1.25) {
+                    txtCreatinina.setForeground(Color.GREEN);
+                } else {
+                    txtCreatinina.setForeground(Color.red);
+                }
+            } else {
+                if (parseDouble >= 0.57 && parseDouble <= 1.11) {
+                    txtCreatinina.setForeground(Color.GREEN);
+                } else {
+                    txtCreatinina.setForeground(Color.red);
+                }
+            }
+            if (parseDouble == 0) {
+                txtCreatinina.setForeground(Color.black);
+            }
+        } else {
+            txtCreatinina.setForeground(Color.black);
+        }
+    }
+
+    private void checkTGO() {
+        String text = txtTGO.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (parseDouble == 38) {
+                txtTGO.setForeground(Color.GREEN);
+            } else if (parseDouble == 0) {
+                txtTGO.setForeground(Color.black);
+            } else {
+                txtTGO.setForeground(Color.red);
+            }
+        } else {
+            txtTGO.setForeground(Color.black);
+        }
+    }
+
+    private void checkTGP() {
+        String text = txtTGP.getText();
+        if (!text.isEmpty()) {
+            double parseDouble = Double.parseDouble(text);
+            if (parseDouble == 41) {
+                txtTGP.setForeground(Color.green);
+            } else if (parseDouble == 0) {
+                txtTGP.setForeground(Color.black);
+            } else {
+                txtTGP.setForeground(Color.red);
+            }
+        } else {
+            txtTGP.setForeground(Color.black);
+        }
+    }
+
     public void setDadosBioquimicos(DadosBioquimicos dadosBioquimicos) {
         this.dadosBioquimicos = dadosBioquimicos;
+    }
+
+    private boolean isGuri() {
+        Date dt = novoPaciente.getPaciente().getDataNascimento();
+        Date date = new Date();
+
+        int yearP = dt.getYear();
+        int year = date.getYear();
+
+        int idade = year - yearP;
+
+        dt.setYear(date.getYear());
+        if (!dt.before(date)) {
+            idade -= 1;
+        }
+        return idade <= 12;
     }
 
     private boolean isMacho() {

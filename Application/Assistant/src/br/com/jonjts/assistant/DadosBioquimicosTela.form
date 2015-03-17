@@ -255,7 +255,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtTriglicerideos" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -335,6 +335,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHemoglobinaKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);&#xa;DecimalFormat decimalFormat = (DecimalFormat) numberFormat;&#xa;decimalFormat.setGroupingUsed(false);"/>
@@ -356,6 +359,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHematocritoKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -376,6 +382,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHemaciasKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
         <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="&#xa;"/>
@@ -397,6 +406,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPlaquetasKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -417,6 +429,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtColesterolTotalKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -437,6 +452,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLDLKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -457,6 +475,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHDLKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -477,6 +498,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTriglicerideosKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -497,6 +521,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGlicosePosPrandialKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -517,6 +544,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGlicoseJejumKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -537,6 +567,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFerroSericoKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -557,6 +590,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFerretinaKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -577,6 +613,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUreiaKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -597,6 +636,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCreatininaKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -620,8 +662,8 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel31">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Homens adultos: 4,6 a 6,2 milh&#xf5;es Mulheres adultas: 4,2 a 5,4 milh&#xf5;es Crian&#xe7;as: 3,8 a 5,5 milh&#xf5;es"/>
-        <Property name="toolTipText" type="java.lang.String" value="Homens adultos: 4,6 a 6,2 milh&#xf5;es&#xa;Mulheres adultas: 4,2 a 5,4 milh&#xf5;es&#xa;Crian&#xe7;as: 3,8 a 5,5 milh&#xf5;es"/>
+        <Property name="text" type="java.lang.String" value="Homens adultos: 4,6 a 6,2 milh&#xf5;es; Mulheres adultas: 4,2 a 5,4 milh&#xf5;es; Crian&#xe7;as: 3,8 a 5,5 milh&#xf5;es"/>
+        <Property name="toolTipText" type="java.lang.String" value="Homens adultos: 4.6 a 6.2 milh&#xf5;es&#xa;Mulheres adultas: 4.2 a 5.4 milh&#xf5;es&#xa;Crian&#xe7;as: 3.8 a 5.5 milh&#xf5;es"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel32">
@@ -701,6 +743,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTGOKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -726,6 +771,9 @@
           <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTGPKeyReleased"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
       </AuxValues>
@@ -791,11 +839,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="+"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddTableActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnRemoveTable">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveTableActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

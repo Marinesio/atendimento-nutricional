@@ -9,12 +9,14 @@ import br.com.jonjts.assistant.control.DadosBioquimicosControl;
 import br.com.jonjts.assistant.control.DadosDieteticosControle;
 import br.com.jonjts.assistant.control.ExameClinicoControle;
 import br.com.jonjts.assistant.control.ExameFisicoControle;
+import br.com.jonjts.assistant.control.ExamesBioquimicosExtrasControl;
 import br.com.jonjts.assistant.control.HistoricoClinicoControle;
 import br.com.jonjts.assistant.control.PacienteControle;
 import br.com.jonjts.assistant.entity.DadosBioquimicos;
 import br.com.jonjts.assistant.entity.DadosDieteticos;
 import br.com.jonjts.assistant.entity.ExameClinico;
 import br.com.jonjts.assistant.entity.ExameFisico;
+import br.com.jonjts.assistant.entity.ExamesBioquimicosExtras;
 import br.com.jonjts.assistant.entity.HistoricoClinico;
 import br.com.jonjts.assistant.entity.Paciente;
 import java.awt.event.WindowAdapter;
@@ -59,6 +61,7 @@ public class NovoPaciente extends Tamplate {
     private ExameFisicoControle exameFisicoControle = new ExameFisicoControle();
     private DadosDieteticosControle dadosDieteticosControle = new DadosDieteticosControle();
     private DadosBioquimicosControl dadosBioquimicosControl = new DadosBioquimicosControl();
+    private ExamesBioquimicosExtrasControl examesBioquimicosExtrasControl = new ExamesBioquimicosExtrasControl();
 
     private List<ExameClinico> allExameClinico;
 
@@ -505,9 +508,9 @@ public class NovoPaciente extends Tamplate {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(679, Short.MAX_VALUE)
+                .addContainerGap(712, Short.MAX_VALUE)
                 .addComponent(btnSalvarDadosBioquimicos)
-                .addGap(43, 43, 43))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,15 +636,27 @@ public class NovoPaciente extends Tamplate {
         dadosBioquimicosTela.save();
     }//GEN-LAST:event_btnSalvarDadosBioquimicosActionPerformed
 
-    public DadosBioquimicos insertDadosBioquimicos(DadosBioquimicos bioquimicos) throws Exception {
+    public DadosBioquimicos insertDadosBioquimicos(DadosBioquimicos bioquimicos, List<ExamesBioquimicosExtras> list) throws Exception {
         saveExameExameClinico();
-        bioquimicos.setIdExameClinico(((ExameClinico) cbExameClinico.getSelectedItem()).getId());
+        ExameClinico name = getSelectedExameClinico();
+        list = dadosBioquimicosTela.bindGrid(paciente, name, list);
+        examesBioquimicosExtrasControl.insert(list);
+
+        bioquimicos.setIdExameClinico(name.getId());
         bioquimicos.setIdPaciente(paciente.getId());
         return dadosBioquimicosControl.insert(bioquimicos);
     }
 
-    public void updateDadosBioquimicos(DadosBioquimicos bioquimicos) throws Exception {
+    private ExameClinico getSelectedExameClinico() {
+        final ExameClinico name = (ExameClinico) cbExameClinico.getSelectedItem();
+        return name;
+    }
+
+    public void updateDadosBioquimicos(DadosBioquimicos bioquimicos, List<ExamesBioquimicosExtras> list) throws Exception {
         saveExameExameClinico();
+        final ExameClinico selectedExameClinico = getSelectedExameClinico();
+        list = dadosBioquimicosTela.bindGrid(paciente, selectedExameClinico, list);
+        examesBioquimicosExtrasControl.update(list, selectedExameClinico.getId());
         dadosBioquimicosControl.update(bioquimicos);
     }
 
@@ -680,7 +695,7 @@ public class NovoPaciente extends Tamplate {
     }
 
     private void saveExameExameClinico() throws Exception {
-        final ExameClinico selectedItem = (ExameClinico) cbExameClinico.getSelectedItem();
+        ExameClinico selectedItem = getSelectedExameClinico();
         if (selectedItem == null || selectedItem.getId() == null) {
             ExameClinico exameClinico = new ExameClinico();
             exameClinico = new ExameClinico(paciente.getId(), new Date());
