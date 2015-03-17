@@ -55,7 +55,15 @@ public class PacienteControle implements IControle<Paciente>{
 
     @Override
     public void delete(Number id) throws Exception {
-        getPacienteDAO().deleteById(id.longValue());
+        Paciente get = get(id);
+        get.setStatus(false);
+        update(get);
+    }
+    
+    public void restore(Long id) throws Exception{
+        Paciente get = get(id);
+        get.setStatus(true);
+        update(get);
     }
 
     @Override
@@ -66,6 +74,12 @@ public class PacienteControle implements IControle<Paciente>{
     public List<Paciente> searchByName(String nome) throws SQLException{
         QueryBuilder<Paciente, Long> builder = getPacienteDAO().queryBuilder();
         List<Paciente> query = builder.where().like(Paciente.FILD_NOME, "%"+nome+"%").and().eq(Paciente.FILD_STATUS, 1).query();
+        return query; 
+    }
+    
+    public List<Paciente> searchByNameExcluidos(String nome) throws SQLException{
+        QueryBuilder<Paciente, Long> builder = getPacienteDAO().queryBuilder();
+        List<Paciente> query = builder.where().like(Paciente.FILD_NOME, "%"+nome+"%").and().eq(Paciente.FILD_STATUS, 0).query();
         return query; 
     }
 

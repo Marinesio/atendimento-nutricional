@@ -10,6 +10,10 @@ import br.com.jonjts.assistant.control.PacienteControle;
 import br.com.jonjts.assistant.entity.ExameClinico;
 import br.com.jonjts.assistant.persistence.DAO;
 import br.com.jonjts.assistant.entity.Paciente;
+import java.awt.HeadlessException;
+import java.awt.MenuBar;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -22,8 +26,11 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -49,11 +56,7 @@ public class Main extends Tamplate {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent evt) {
-                if (JOptionPane.showConfirmDialog(null, "Deseja fechar " + getTitle() + "?") == JOptionPane.OK_OPTION) {
-                    System.exit(0);
-                } else {
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                }
+                onClose();
             }
         });
         fixLayoutTable();
@@ -64,12 +67,20 @@ public class Main extends Tamplate {
         }
     }
 
+    protected void onClose() throws HeadlessException {
+        if (JOptionPane.showConfirmDialog(null, "Deseja fechar " + getTitle() + "?") == JOptionPane.OK_OPTION) {
+            System.exit(0);
+        } else {
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        }
+    }
+
     @Override
     protected void fixLayout() {
         super.fixLayout(); //To change body of generated methods, choose Tools | Templates.
         setTitle("Assistant");
-        setSize(731, 360);
-        setResizable(false);
+        setSize(912, 653);
+        //setResizable(false);
     }
 
     private void fixLayoutTable() {
@@ -96,12 +107,13 @@ public class Main extends Tamplate {
                     Object valueAt = tbPacientes.getValueAt(tbPacientes.getSelectedRow(), 0);
                     callNovoPaciente(valueAt);
                 }
+                btnExcluir.setEnabled(true);
             }
         });
 
     }
 
-    private void popularTabela(List<Paciente> list) {
+    protected void popularTabela(List<Paciente> list) {
         DefaultTableModel model = (DefaultTableModel) tbPacientes.getModel();
         tbPacientes.getColumnModel().getColumn(0).setWidth(10);
         model.fireTableDataChanged();
@@ -158,6 +170,10 @@ public class Main extends Tamplate {
         btnCarregarPaciente = new javax.swing.JButton();
         txtPesquisa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnExcluir = new javax.swing.JButton();
+        mbAssistant = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(731, 360));
@@ -184,6 +200,11 @@ public class Main extends Tamplate {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbPacientes.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                tbPacientesMouseDragged(evt);
             }
         });
         jScrollPane1.setViewportView(tbPacientes);
@@ -213,44 +234,71 @@ public class Main extends Tamplate {
 
         jLabel2.setText("Pesquisar por nome");
 
+        btnExcluir.setText("Excluir Paciente");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        jMenu1.setText("Paciente");
+
+        jMenuItem1.setText("Restaurar Paciente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAssistant.add(jMenu1);
+
+        setJMenuBar(mbAssistant);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCarregarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNovoPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPesquisa))
-                        .addGap(69, 69, 69))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+                        .addGap(50, 50, 50))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNovoPaciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPesquisa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCarregarPaciente, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(83, 83, 83))))
+                        .addGap(72, 72, 72))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnNovoPaciente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCarregarPaciente)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNovoPaciente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCarregarPaciente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExcluir)
+                .addContainerGap(261, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,6 +310,7 @@ public class Main extends Tamplate {
     }//GEN-LAST:event_btnNovoPacienteActionPerformed
 
     private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
+        btnExcluir.setEnabled(false);
         search();
     }
 
@@ -290,6 +339,63 @@ public class Main extends Tamplate {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btnCarregarPacienteActionPerformed
+
+    private void tbPacientesMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPacientesMouseDragged
+
+    }//GEN-LAST:event_tbPacientesMouseDragged
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        onSelectedExcluir();
+    }
+
+    protected void onSelectedExcluir() throws HeadlessException {
+        int[] selectedRows = tbPacientes.getSelectedRows();
+        if (JOptionPane.showConfirmDialog(null, "Deseja remover " + selectedRows.length + " paciente(s)?") == JOptionPane.OK_OPTION) {
+            for (int i = 0; i < selectedRows.length; i++) {
+                try {
+                    Long valueAt = (Long) tbPacientes.getValueAt(selectedRows[i], 0);
+                    pacienteBO.delete(valueAt.longValue());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir paciente");
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            search();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        RestorePacienteTela pacienteTela = new RestorePacienteTela(this);
+        pacienteTela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    public JButton getBtnCarregarPaciente() {
+        return btnCarregarPaciente;
+    }
+
+    public JButton getBtnNovoPaciente() {
+        return btnNovoPaciente;
+    }
+
+    public JButton getBtnExcluir() {
+        return btnExcluir;
+    }
+
+    public JTable getTbPacientes() {
+        return tbPacientes;
+    }
+
+    public PacienteControle getPacienteBO() {
+        return pacienteBO;
+    }
+
+    public JMenuBar getMbAssistant() {
+        return mbAssistant;
+    }
+
+    public JTextField getTxtPesquisa() {
+        return txtPesquisa;
+    }
 
     /**
      * @param args the command line arguments
@@ -328,10 +434,14 @@ public class Main extends Tamplate {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCarregarPaciente;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovoPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuBar mbAssistant;
     private javax.swing.JTable tbPacientes;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables

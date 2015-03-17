@@ -941,6 +941,7 @@ public class DadosBioquimicosTela extends javax.swing.JFrame implements ITab {
     private void setOnUpdateGrid() {
         getTableModelExtras().addTableModelListener(new TableModelListener() {
 
+           
             @Override
             public void tableChanged(TableModelEvent e) {
                 if (e.getType() == e.UPDATE) {
