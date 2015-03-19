@@ -18,7 +18,7 @@ public class RestaurarControl {
 
     public final String pathMysql = "\"C:\\Program Files\\MySQL\\MySQL Server 5.6";
 
-    public void doRestore(String mySqlPath, String passworld, String destiny) throws IOException  {
+    public void doRestore(String mySqlPath, String passworld, String destiny) throws IOException {
         mySqlPath += "\\bin\\mysql.exe\"";
 
         StringBuilder builder = new StringBuilder();
@@ -27,8 +27,7 @@ public class RestaurarControl {
         builder.append("--password=").append(passworld);
         builder.append(" --port=3306 --protocol=tcp --force");
         builder.append(" assistant < ").append(destiny);
-        
-        
+
         File f = new File("restore.bat");
         FileOutputStream fos = new FileOutputStream(f);
         fos.write(builder.toString().getBytes());
