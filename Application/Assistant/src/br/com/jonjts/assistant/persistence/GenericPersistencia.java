@@ -68,7 +68,7 @@ public abstract class GenericPersistencia<E,T> extends BaseDaoImpl<E, T> impleme
     }
     
      public E getLast(String idColumn) throws SQLException{
-        List<E> list = query(queryBuilder().orderBy(idColumn, false).limit(1L).prepare());
+        List<E> list = query(queryBuilder().orderBy(idColumn, false).limit(1).prepare());
         return list.get(0);
     }
 }
