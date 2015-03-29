@@ -410,11 +410,15 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtColesterolTotal">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="JTextField.RIGHT" type="code"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtColesterolTotalKeyReleased"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CodeGeneration" type="java.lang.Integer" value="1"/>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="FieldsDadosBioquimicos_txtColesterolTotal"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="202"/>
@@ -477,7 +481,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);&#xa;DecimalFormat decimalFormat = (DecimalFormat) numberFormat;&#xa;decimalFormat.setGroupingUsed(false);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);&#xa;DecimalFormat decimalFormat = (DecimalFormat) numberFormat;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

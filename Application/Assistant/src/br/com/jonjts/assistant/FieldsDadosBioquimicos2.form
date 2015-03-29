@@ -330,9 +330,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtPlaquetas">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPlaquetasActionPerformed"/>
@@ -360,21 +358,20 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtColesterolTotal">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+      </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtColesterolTotalKeyReleased"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CodeGeneration" type="java.lang.Integer" value="1"/>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(decimalFormat)"/>
-        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="FieldsDadosBioquimicos_txtColesterolTotal"/>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="202"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="130"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtTGO">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTGOKeyReleased"/>
@@ -390,9 +387,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtLDL">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtLDLKeyReleased"/>
@@ -408,9 +403,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHemoglobina">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHemoglobinaKeyReleased"/>
@@ -427,9 +420,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHematocrito">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHematocritoKeyReleased"/>
@@ -445,9 +436,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHemacias">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHemaciasKeyReleased"/>
@@ -469,9 +458,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtTGP">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTGPKeyReleased"/>
@@ -487,9 +474,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtHDL">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtHDLKeyReleased"/>
@@ -510,9 +495,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtTriglicerideos">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTriglicerideosKeyReleased"/>
@@ -528,7 +511,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtGlicosePosPrandial">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGlicosePosPrandialKeyReleased"/>
@@ -544,9 +527,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtGlicoseJejum">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtGlicoseJejumKeyReleased"/>
@@ -562,9 +543,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtFerroSerico">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFerroSericoKeyReleased"/>
@@ -580,9 +559,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtFerretina">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFerretinaKeyReleased"/>
@@ -598,9 +575,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtUreia">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUreiaKeyReleased"/>
@@ -616,9 +591,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtCreatinina">
       <Properties>
-        <Property name="horizontalAlignment" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="javax.swing.JTextField.RIGHT" type="code"/>
-        </Property>
+        <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCreatininaKeyReleased"/>

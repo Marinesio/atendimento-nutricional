@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -162,13 +163,7 @@ public class FieldsDadosBioquimicos extends javax.swing.JPanel {
         jLabel42 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        try {
-            txtColesterolTotal =(javax.swing.JFormattedTextField)java.beans.Beans.instantiate(getClass().getClassLoader(), "br/com/jonjts/assistant.FieldsDadosBioquimicos_txtColesterolTotal");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
+        txtColesterolTotal = new javax.swing.JFormattedTextField(decimalFormat);
         txtTGO = new javax.swing.JFormattedTextField(decimalFormat);
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -177,7 +172,6 @@ public class FieldsDadosBioquimicos extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
-        decimalFormat.setGroupingUsed(false);
         txtHemoglobina = new javax.swing.JFormattedTextField(decimalFormat);
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -281,6 +275,7 @@ public class FieldsDadosBioquimicos extends javax.swing.JPanel {
 
         jLabel44.setText("TGO:");
 
+        txtColesterolTotal.setHorizontalAlignment(JTextField.RIGHT);
         txtColesterolTotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtColesterolTotalKeyReleased(evt);

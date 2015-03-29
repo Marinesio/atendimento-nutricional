@@ -178,13 +178,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
         jLabel41 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        try {
-            txtColesterolTotal =(javax.swing.JFormattedTextField)java.beans.Beans.instantiate(getClass().getClassLoader(), "br/com/jonjts/assistant.FieldsDadosBioquimicos_txtColesterolTotal");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
+        txtColesterolTotal = new javax.swing.JFormattedTextField(decimalFormat);
         txtTGO = new javax.swing.JFormattedTextField(decimalFormat);
         jLabel10 = new javax.swing.JLabel();
         txtLDL = new javax.swing.JFormattedTextField(decimalFormat);
@@ -258,7 +252,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
         jLabel40.setText("Mulheres: 6-159  ng/ml; Homens: 28-397  ng/ml");
         jLabel40.setToolTipText("Mulheres: 6-159  ng/ml; Homens: 28-397  ng/ml");
 
-        txtPlaquetas.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPlaquetas.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPlaquetas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPlaquetasActionPerformed(evt);
@@ -278,13 +272,14 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
         jLabel42.setText("Mulher: 0,57 a 1,11 mg/dL Homem: 0,62 a 1,25  mg/dL");
         jLabel42.setToolTipText("Mulher: 0,57 a 1,11 mg/dL Homem: 0,62 a 1,25  mg/dL");
 
+        txtColesterolTotal.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtColesterolTotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtColesterolTotalKeyReleased(evt);
             }
         });
 
-        txtTGO.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTGO.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTGO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTGOKeyReleased(evt);
@@ -293,7 +288,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel10.setText("mg/dl");
 
-        txtLDL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtLDL.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtLDL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtLDLKeyReleased(evt);
@@ -302,7 +297,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel12.setText("mg/dL");
 
-        txtHemoglobina.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHemoglobina.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtHemoglobina.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtHemoglobinaKeyReleased(evt);
@@ -311,7 +306,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel2.setText("g/dL");
 
-        txtHematocrito.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHematocrito.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtHematocrito.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtHematocritoKeyReleased(evt);
@@ -320,7 +315,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel4.setText("%");
 
-        txtHemacias.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHemacias.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtHemacias.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtHemaciasKeyReleased(evt);
@@ -331,7 +326,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel46.setText("38 U/L");
 
-        txtTGP.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTGP.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTGP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTGPKeyReleased(evt);
@@ -340,7 +335,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel48.setText("U/L");
 
-        txtHDL.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtHDL.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtHDL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtHDLKeyReleased(evt);
@@ -351,7 +346,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel14.setText("mg/dL");
 
-        txtTriglicerideos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTriglicerideos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtTriglicerideos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTriglicerideosKeyReleased(evt);
@@ -360,7 +355,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel16.setText("mg/dL");
 
-        txtGlicosePosPrandial.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGlicosePosPrandial.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtGlicosePosPrandial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtGlicosePosPrandialKeyReleased(evt);
@@ -369,7 +364,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel18.setText("mg/dL");
 
-        txtGlicoseJejum.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtGlicoseJejum.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtGlicoseJejum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtGlicoseJejumKeyReleased(evt);
@@ -378,7 +373,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel20.setText("mg/dL");
 
-        txtFerroSerico.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFerroSerico.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtFerroSerico.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFerroSericoKeyReleased(evt);
@@ -387,7 +382,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel22.setText("ug/dL");
 
-        txtFerretina.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtFerretina.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtFerretina.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFerretinaKeyReleased(evt);
@@ -396,7 +391,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel24.setText("ng/ml");
 
-        txtUreia.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtUreia.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtUreia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtUreiaKeyReleased(evt);
@@ -405,7 +400,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
 
         jLabel26.setText("mg/dL");
 
-        txtCreatinina.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCreatinina.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCreatinina.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCreatininaKeyReleased(evt);
@@ -707,7 +702,7 @@ public class FieldsDadosBioquimicos2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private static transient volatile javax.swing.JFormattedTextField txtColesterolTotal;
+    private transient javax.swing.JFormattedTextField txtColesterolTotal;
     private javax.swing.JFormattedTextField txtCreatinina;
     private javax.swing.JFormattedTextField txtFerretina;
     private javax.swing.JFormattedTextField txtFerroSerico;
