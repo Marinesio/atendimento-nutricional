@@ -105,6 +105,7 @@ public class NovoPaciente extends Tamplate {
         }
         loadExameFisico();
         loadDadosDieteticos();
+        loadDadosBioquimicos();
 
         fixLayout();
     }

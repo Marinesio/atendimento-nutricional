@@ -14,7 +14,6 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 /**
  *
