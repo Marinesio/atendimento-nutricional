@@ -31,10 +31,10 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="fieldsDadosBioquimicos2" min="-2" pref="489" max="-2" attributes="0"/>
                   <Component id="cbExame2" min="-2" pref="111" max="-2" attributes="0"/>
+                  <Component id="fieldsDadosBioquimicos2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

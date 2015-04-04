@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cbDificuldadeMastigacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbRefluxo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbNauseas" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbVomitos" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbPirose" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbDisfagia" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbOdinofagia" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="81" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="cbApetiteAtual" max="32767" attributes="0"/>
+                  <Component id="cbTransitoIntestinal" pref="130" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cbDificuldadeMastigacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbApetiteAtual" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cbRefluxo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbTransitoIntestinal" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cbNauseas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cbVomitos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cbPirose" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cbDisfagia" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cbOdinofagia" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="126" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JCheckBox" name="cbDificuldadeMastigacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dificuldade de mastigacao"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbRefluxo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Refluxo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbNauseas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nauseas"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbVomitos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vomitos"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbPirose">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pirose"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbDisfagia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Disfagia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbOdinofagia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Odinofagia"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apetite atual:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbApetiteAtual">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Preservado"/>
+            <StringItem index="1" value="Autemtado"/>
+            <StringItem index="2" value="Redusido"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Transito Intestinal:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbTransitoIntestinal">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Constipa&#xe7;&#xe3;o"/>
+            <StringItem index="1" value="Diarreia"/>
+            <StringItem index="2" value="Normal"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

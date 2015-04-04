@@ -30,28 +30,28 @@ public class TratoGastroIntestinal {
     private String apetiteAtual;
 
     @DatabaseField(columnName = "dificuldade_mastigacao")
-    private String dificuldadeMastigacao;
+    private Boolean dificuldadeMastigacao;
 
     @DatabaseField(columnName = "transito_intestinal")
     private String transitoIntestinal;
 
     @DatabaseField(columnName = "refluxo")
-    private String refluxo;
+    private Boolean refluxo;
 
     @DatabaseField(columnName = "nauseas")
-    private String nauseas;
+    private Boolean nauseas;
 
     @DatabaseField(columnName = "vomitos")
-    private String vomitos;
+    private Boolean vomitos;
 
     @DatabaseField(columnName = "pirose")
-    private String pirose;
+    private Boolean pirose;
 
     @DatabaseField(columnName = "disfagia")
-    private String disfagia;
+    private Boolean disfagia;
 
     @DatabaseField(columnName = "odinofagia")
-    private String odinofagia;
+    private Boolean odinofagia;
 
     public TratoGastroIntestinal() {
         super();
@@ -89,11 +89,11 @@ public class TratoGastroIntestinal {
         this.apetiteAtual = apetiteAtual;
     }
 
-    public String getDificuldadeMastigacao() {
+    public Boolean getDificuldadeMastigacao() {
         return dificuldadeMastigacao;
     }
 
-    public void setDificuldadeMastigacao(String dificuldadeMastigacao) {
+    public void setDificuldadeMastigacao(Boolean dificuldadeMastigacao) {
         this.dificuldadeMastigacao = dificuldadeMastigacao;
     }
 
@@ -105,51 +105,51 @@ public class TratoGastroIntestinal {
         this.transitoIntestinal = transitoIntestinal;
     }
 
-    public String getRefluxo() {
+    public Boolean getRefluxo() {
         return refluxo;
     }
 
-    public void setRefluxo(String refluxo) {
+    public void setRefluxo(Boolean refluxo) {
         this.refluxo = refluxo;
     }
 
-    public String getNauseas() {
+    public Boolean getNauseas() {
         return nauseas;
     }
 
-    public void setNauseas(String nauseas) {
+    public void setNauseas(Boolean nauseas) {
         this.nauseas = nauseas;
     }
 
-    public String getVomitos() {
+    public Boolean getVomitos() {
         return vomitos;
     }
 
-    public void setVomitos(String vomitos) {
+    public void setVomitos(Boolean vomitos) {
         this.vomitos = vomitos;
     }
 
-    public String getPirose() {
+    public Boolean getPirose() {
         return pirose;
     }
 
-    public void setPirose(String pirose) {
+    public void setPirose(Boolean pirose) {
         this.pirose = pirose;
     }
 
-    public String getDisfagia() {
+    public Boolean getDisfagia() {
         return disfagia;
     }
 
-    public void setDisfagia(String disfagia) {
+    public void setDisfagia(Boolean disfagia) {
         this.disfagia = disfagia;
     }
 
-    public String getOdinofagia() {
+    public Boolean getOdinofagia() {
         return odinofagia;
     }
 
-    public void setOdinofagia(String odinofagia) {
+    public void setOdinofagia(Boolean odinofagia) {
         this.odinofagia = odinofagia;
     }
 
