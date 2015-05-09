@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class ExameFisicoControle implements IControle<ExameFisico> {
+public class ExameFisicoControle implements IControl<ExameFisico> {
 
     private ExameFisicoPersistencia exameFisicoDAO;
 

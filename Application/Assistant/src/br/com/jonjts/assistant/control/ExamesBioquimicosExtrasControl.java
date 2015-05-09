@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class ExamesBioquimicosExtrasControl implements IControle<ExamesBioquimicosExtras> {
+public class ExamesBioquimicosExtrasControl implements IControl<ExamesBioquimicosExtras> {
 
     private ExamesBioquimicosPersistence dao;
 

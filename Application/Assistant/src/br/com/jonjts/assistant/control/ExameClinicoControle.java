@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class ExameClinicoControle implements IControle<ExameClinico>{
+public class ExameClinicoControle implements IControl<ExameClinico>{
     private ExameClinicoPersistencia exameClinicoDAO;
 
     private ExameClinicoPersistencia getExameClinicoDAO() throws SQLException {

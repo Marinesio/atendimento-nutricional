@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class PacienteControle implements IControle<Paciente>{
+public class PacienteControle implements IControl<Paciente>{
     
     private PacientePersistencia pacienteDAO;
 

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class HistoricoClinicoControle implements IControle<HistoricoClinico>{
+public class HistoricoClinicoControle implements IControl<HistoricoClinico>{
     
     private HistoricoClinicoPersistencia historicoClinicoDAO;
     

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class DadosDieteticosControle implements IControle<DadosDieteticos>{
+public class DadosDieteticosControle implements IControl<DadosDieteticos>{
     private DadosDieteticosPersistencia persistencia;
 
     private DadosDieteticosPersistencia getPersistencia() throws SQLException {

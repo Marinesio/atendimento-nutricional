@@ -19,7 +19,7 @@ import java.util.List;
  * @author Jonas
  */
 
-public class TratoGastroIntestinalControl implements IControle<TratoGastroIntestinal>{
+public class TratoGastroIntestinalControl implements IControl<TratoGastroIntestinal>{
     
     private TratoGastroIntestinalPersistence dao;
 

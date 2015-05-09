@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Jonas
  */
-public class DadosBioquimicosControl implements IControle<DadosBioquimicos>{
+public class DadosBioquimicosControl implements IControl<DadosBioquimicos>{
     
     private DadosQuimicosPersistence dao;
 
