@@ -42,4 +42,9 @@ public class PlanoSaude {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }
