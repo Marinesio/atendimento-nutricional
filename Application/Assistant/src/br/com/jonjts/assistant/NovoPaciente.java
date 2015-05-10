@@ -13,6 +13,7 @@ import br.com.jonjts.assistant.control.ExamesBioquimicosExtrasControl;
 import br.com.jonjts.assistant.control.HistoricoClinicoControle;
 import br.com.jonjts.assistant.control.PacienteControle;
 import br.com.jonjts.assistant.control.PlanoSaudeControl;
+import br.com.jonjts.assistant.control.TelefoneControl;
 import br.com.jonjts.assistant.control.TratoGastroIntestinalControl;
 import br.com.jonjts.assistant.entity.DadosBioquimicos;
 import br.com.jonjts.assistant.entity.DadosDieteticos;
@@ -22,16 +23,22 @@ import br.com.jonjts.assistant.entity.ExamesBioquimicosExtras;
 import br.com.jonjts.assistant.entity.HistoricoClinico;
 import br.com.jonjts.assistant.entity.Paciente;
 import br.com.jonjts.assistant.entity.PlanoSaude;
+import br.com.jonjts.assistant.entity.Telefone;
 import br.com.jonjts.assistant.entity.TratoGastroIntestinal;
+import com.j256.ormlite.dao.ForeignCollection;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -70,6 +77,7 @@ public class NovoPaciente extends Tamplate {
     private ExamesBioquimicosExtrasControl examesBioquimicosExtrasControl = new ExamesBioquimicosExtrasControl();
     private TratoGastroIntestinalControl tratoGastroIntestinalControl = new TratoGastroIntestinalControl();
     private PlanoSaudeControl planoSaudeControl = new PlanoSaudeControl();
+    private TelefoneControl telefoneControl = new TelefoneControl();
 
     private List<ExameClinico> allExameClinico;
 
@@ -101,6 +109,12 @@ public class NovoPaciente extends Tamplate {
             loadAllInformations();
             loadCbExameClinico();
             try {
+                loadTelefones();
+            } catch (SQLException ex) {
+                Logger.getLogger(NovoPaciente.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Erro ao carregar telefones.");
+            }
+            try {
                 final HistoricoClinico get = historicoClinicoControle.get(paciente.getId());
                 historicoClinicoTela.setHistoricoClinico(get);
                 historicoClinicoTela.loadData();
@@ -113,11 +127,20 @@ public class NovoPaciente extends Tamplate {
         }
         loadExameFisico();
         loadDadosDieteticos();
-        loadDadosBioquimicos();        
+        loadDadosBioquimicos();
         loadTratoGastroIntestinal();
         loadPlanoSaude();
 
         fixLayout();
+    }
+
+    private void loadTelefones() throws SQLException {
+        telefonePanel.setList(getTelefones());
+        telefonePanel.loadTable();
+    }
+
+    private List<Telefone> getTelefones() throws SQLException {
+        return telefoneControl.get(paciente);
     }
 
     public void loadPlanoSaude() {
@@ -340,6 +363,7 @@ public class NovoPaciente extends Tamplate {
         jLabel9 = new javax.swing.JLabel();
         cbPlanoSaude = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
+        telefonePanel = new br.com.jonjts.assistant.TelefonePanel();
         jPanel2 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         pnlExameFisico = new javax.swing.JPanel();
@@ -423,9 +447,6 @@ public class NovoPaciente extends Tamplate {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -433,19 +454,25 @@ public class NovoPaciente extends Tamplate {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblIdadePaciente))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblIdadePaciente)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(58, 58, 58)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtDtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(64, 64, 64)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel9)
                                             .addComponent(jLabel2))
@@ -455,17 +482,12 @@ public class NovoPaciente extends Tamplate {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(cbPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButton5))))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)))
-                .addContainerGap())
+                                                .addComponent(jButton5))))
+                                    .addComponent(telefonePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(46, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,30 +506,35 @@ public class NovoPaciente extends Tamplate {
                     .addComponent(cbPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblIdadePaciente))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(125, 125, 125)))
-                .addComponent(jButton1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblIdadePaciente))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(cbEscolaridade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jLabel6)))
+                        .addGap(0, 173, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(telefonePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
 
@@ -719,6 +746,7 @@ public class NovoPaciente extends Tamplate {
                 loadCbExameClinico();
                 saveExameExameClinico();
                 enableTabs();
+                saveTelefones();
             } catch (Exception ex) {
                 paciente = null;
                 ex.printStackTrace();
@@ -727,11 +755,17 @@ public class NovoPaciente extends Tamplate {
         } else {
             try {
                 updatePaciente();
+                saveTelefones();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void saveTelefones() throws Exception {
+        List<Telefone> list = telefonePanel.getList();
+        telefoneControl.insert(paciente, list);
+    }
 
     private void cbExameClinicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExameClinicoActionPerformed
         loadExameFisico();
@@ -876,7 +910,7 @@ public class NovoPaciente extends Tamplate {
         paciente.setProfissao(txtProfissao.getText());
         paciente.setSexo((String) cbSexoPaciente.getSelectedItem());
         paciente.setEmail(txtEmail.getText());
-        PlanoSaude selectedItem =(PlanoSaude) cbPlanoSaude.getSelectedItem();
+        PlanoSaude selectedItem = (PlanoSaude) cbPlanoSaude.getSelectedItem();
         paciente.setPlanoSaude(selectedItem != null ? selectedItem : null);
     }
 
@@ -962,6 +996,7 @@ public class NovoPaciente extends Tamplate {
     private javax.swing.JLabel lblIdadePaciente;
     private javax.swing.JPanel pnlExameFisico;
     private javax.swing.JTabbedPane tbpPaciente;
+    private br.com.jonjts.assistant.TelefonePanel telefonePanel;
     private javax.swing.JTextField txtDtNascimento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNomePaciente;

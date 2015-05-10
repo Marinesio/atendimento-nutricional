@@ -71,9 +71,6 @@ public class Paciente implements Serializable {
     @DatabaseField(columnName = FILD_PLANO_SAUDE, foreign = true, foreignAutoRefresh = true)
     private PlanoSaude planoSaude;
 
-    @ForeignCollectionField(eager = false)
-    private ForeignCollection<Telefone> telefones;
-
     public Paciente() {
         super();
         setStatus(true);
@@ -182,13 +179,4 @@ public class Paciente implements Serializable {
     public PlanoSaude getPlanoSaude() {
         return planoSaude;
     }
-
-    public void setTelefones(ForeignCollection<Telefone> telefones) {
-        this.telefones = telefones;
-    }
-
-    public ForeignCollection<Telefone> getTelefones() {
-        return telefones;
-    }
-
 }

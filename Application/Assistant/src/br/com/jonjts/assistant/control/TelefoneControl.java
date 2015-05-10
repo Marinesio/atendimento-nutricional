@@ -5,9 +5,13 @@
  */
 package br.com.jonjts.assistant.control;
 
+import br.com.jonjts.assistant.entity.Paciente;
 import br.com.jonjts.assistant.entity.Telefone;
 import br.com.jonjts.assistant.persistence.TelefonePersistence;
+import com.j256.ormlite.stmt.DeleteBuilder;
+import com.j256.ormlite.stmt.QueryBuilder;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,5 +55,24 @@ public class TelefoneControl implements IControl<Telefone>{
         return getPersistence().findById(id.longValue());
     }
     
+    public List<Telefone> get(Paciente paciente) throws SQLException{
+        QueryBuilder<Telefone, Long> queryBuilder = getPersistence().queryBuilder();
+        queryBuilder.where().eq("id_paciente", paciente.getId());
+        return queryBuilder.query();
+    }
+    
+    public void delete(Paciente paciente) throws Exception{
+        DeleteBuilder<Telefone, Long> deleteBuilder = getPersistence().deleteBuilder();
+        deleteBuilder.where().eq("id_paciente", paciente.getId());
+        deleteBuilder.delete();
+    }
+
+    public void insert(Paciente paciente, Collection<Telefone> collection) throws Exception{
+        delete(paciente);
+        for(Telefone t : collection){
+            t.setPaciente(paciente);
+            insert(t);
+        }
+    }
     
 }

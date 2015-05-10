@@ -86,6 +86,8 @@ public class PlanoSaudeTela extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbPlanoSaude.setOpaque(false);
+        tbPlanoSaude.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbPlanoSaude);
 
         btnExcluir.setText("Excluir");
@@ -161,7 +163,7 @@ public class PlanoSaudeTela extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int selectedRow = tbPlanoSaude.getSelectedRow();
-        if(selectedRow >= 0){
+        if (selectedRow >= 0) {
             try {
                 getTableModelExtras().removeRow(selectedRow);
                 Object valueAt = getTableModelExtras().getValueAt(selectedRow, 0);
@@ -186,6 +188,7 @@ public class PlanoSaudeTela extends javax.swing.JFrame {
     private void loadGrid() {
         try {
             List<PlanoSaude> all = control.getAll();
+            tbPlanoSaude.getColumnModel().getColumn(0).setPreferredWidth(5);
             DefaultTableModel tableModelExtras = getTableModelExtras();
             clearGrid();
             for (PlanoSaude planoSaude : all) {
