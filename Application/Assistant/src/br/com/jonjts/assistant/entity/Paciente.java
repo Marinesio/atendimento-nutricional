@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.jonjts.assistant.entity;
 
 import br.com.jonjts.assistant.persistence.PacientePersistencia;
@@ -19,7 +18,7 @@ import java.util.Date;
  * @author Jonas
  */
 @DatabaseTable(tableName = "paciente", daoClass = PacientePersistencia.class)
-public class Paciente implements Serializable{
+public class Paciente implements Serializable {
 
     public static final String FILD_ID = "id";
     public static final String FILD_NOME = "nome";
@@ -30,46 +29,53 @@ public class Paciente implements Serializable{
     public static final String FILD_DATA_CADASTRO = "data_cadastro";
     public static final String FILD_ESCOLARIDADE = "escolaridade";
     public static final String FILD_STATUS = "status";
-    
+    public static final String FILD_EMAIL = "email";
+    public static final String FILD_PLANO_SAUDE = "id_plano_saude";
+
     @DatabaseField(columnName = FILD_ID, id = true)
     private Long id;
-    
+
     @DatabaseField(columnName = FILD_NOME, canBeNull = false)
     private String nome;
-    
+
     @DatabaseField(columnName = FILD_SEXO, canBeNull = false)
     private String sexo;
-    
+
     @DatabaseField(columnName = FILD_DATA_NASCIMENTO, format = "dd/MM/yyyy")
     private Date dataNascimento;
-    
+
     @DatabaseField(columnName = FILD_PROFISSAO)
     private String profissao;
-    
+
     @DatabaseField(columnName = FILD_OBJETIVO_CONSULTA, canBeNull = false)
     private String objetivoConsulta;
-    
+
     @DatabaseField(columnName = FILD_DATA_CADASTRO, canBeNull = false, format = "dd/MM/yyyy hh:mm")
     private Date dataCadastro;
-    
+
     @DatabaseField(columnName = FILD_ESCOLARIDADE)
     private String escolaridade;
-    
+
     @DatabaseField(columnName = FILD_STATUS, canBeNull = false, defaultValue = "1")
     private Boolean status;
-    
+
     @ForeignCollectionField(eager = false)
-    private ForeignCollection<MedicamentoDomiliciar>  medicamentos;
-    
+    private ForeignCollection<MedicamentoDomiliciar> medicamentos;
+
     @ForeignCollectionField(eager = false)
     private ForeignCollection<Exercicio> exercicios;
+
+    @DatabaseField(columnName = FILD_EMAIL)
+    private String email;
+
+    @DatabaseField(columnName = FILD_PLANO_SAUDE, foreign = true, foreignAutoRefresh = true)
+    private PlanoSaude planoSaude;
 
     public Paciente() {
         super();
         setStatus(true);
     }
 
-   
     public Long getId() {
         return id;
     }
@@ -158,7 +164,20 @@ public class Paciente implements Serializable{
         this.medicamentos = medicamentos;
     }
 
-    
-    
-}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setPlanoSaude(PlanoSaude planoSaude) {
+        this.planoSaude = planoSaude;
+    }
+
+    public PlanoSaude getPlanoSaude() {
+        return planoSaude;
+    }
+
+}
