@@ -145,6 +145,7 @@ public class NovoPaciente extends Tamplate {
 
     public void loadPlanoSaude() {
         try {
+            cbPlanoSaude.removeAllItems();
             List<PlanoSaude> all = planoSaudeControl.getAll();
             for (PlanoSaude planoSaude : all) {
                 cbPlanoSaude.addItem(planoSaude);

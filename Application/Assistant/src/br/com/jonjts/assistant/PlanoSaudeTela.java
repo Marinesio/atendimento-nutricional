@@ -165,8 +165,8 @@ public class PlanoSaudeTela extends javax.swing.JFrame {
         int selectedRow = tbPlanoSaude.getSelectedRow();
         if (selectedRow >= 0) {
             try {
-                getTableModelExtras().removeRow(selectedRow);
                 Object valueAt = getTableModelExtras().getValueAt(selectedRow, 0);
+                getTableModelExtras().removeRow(selectedRow);
                 control.delete((Number) valueAt);
             } catch (Exception ex) {
                 Logger.getLogger(PlanoSaudeTela.class.getName()).log(Level.SEVERE, null, ex);
