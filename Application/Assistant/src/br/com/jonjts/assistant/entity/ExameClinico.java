@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.jonjts.assistant.entity;
 
 import br.com.jonjts.assistant.persistence.ExameClinicoPersistencia;
@@ -20,22 +19,25 @@ import java.util.Date;
  * @author Jonas
  */
 @DatabaseTable(tableName = "exame_clinico", daoClass = ExameClinicoPersistencia.class)
-public class ExameClinico implements Serializable{
-    
+public class ExameClinico implements Serializable {
+
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     public static final String FILD_ID = "id";
     public static final String FILD_ID_PACIENTE = "id_paciente";
     public static final String FILD_DATE = "data";
-    
+
     @DatabaseField(columnName = FILD_ID, id = true)
     private Long id;
-    
+
     @DatabaseField(columnName = FILD_ID_PACIENTE, canBeNull = false)
     private Long idPaciente;
-    
-   @DatabaseField(columnName = FILD_DATE, format = "dd/MM/yyyy") 
+
+    @DatabaseField(columnName = FILD_DATE, format = "dd/MM/yyyy")
     private Date data;
+
+    @DatabaseField(columnName = "conduta_nutricional")
+    private String condutaNutricional;
 
     public ExameClinico() {
         super();
@@ -76,23 +78,30 @@ public class ExameClinico implements Serializable{
         this.data = data;
     }
 
+    public void setCondutaNutricional(String condutaNutricional) {
+        this.condutaNutricional = condutaNutricional;
+    }
+
+    public String getCondutaNutricional() {
+        return condutaNutricional;
+    }
+
     @Override
     public String toString() {
-        if(isToday()){
+        if (isToday()) {
             return "Hoje";
         }
         return sdf.format(getData());
     }
-    
-    public boolean isToday(){
-        if(data != null){
+
+    public boolean isToday() {
+        if (data != null) {
             Date d = new Date();
-            if(d.getDay() == data.getDay() && d.getMonth() == data.getMonth() && d.getYear() == data.getYear()){
+            if (d.getDay() == data.getDay() && d.getMonth() == data.getMonth() && d.getYear() == data.getYear()) {
                 return true;
             }
         }
         return false;
     }
-   
-    
+
 }
